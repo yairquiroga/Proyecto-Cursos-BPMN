@@ -1,0 +1,9 @@
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/delegates/LiberarAulaVirtualDelegate.java
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/listeners/AsignarListaDefinitivaTaskListener.java
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/delegates/ReservarAulaDelegate.java
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/delegates/LiberarAulaDelegate.java
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/db/DatabaseHelper.java
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/delegates/NotificarEmpresaDelegate.java
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/delegates/ContarCursosEnDesarrolloDelegate.java
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/delegates/HabilitarAccesoEmpresaDelegate.java
+/home/yair/proyecto-flowable-cursos/motor-extensions/src/main/java/ar/edu/unrc/cursos/listeners/ActualizarEstadoCursoExecutionListener.java

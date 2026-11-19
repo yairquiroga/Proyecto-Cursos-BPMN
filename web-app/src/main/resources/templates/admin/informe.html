@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Enviar Informe y Archivar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style> body { background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; } </style>
+</head>
+<body class="py-4">
+    <div class="container" style="max-width: 650px;">
+        <div class="card p-4 bg-white border-0 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h5 fw-bold mb-0">Enviar Informe y Archivar Expediente</h3>
+                <a href="/admin/tareas" class="btn btn-sm btn-outline-secondary">&larr; Volver</a>
+            </div>
+            <p class="text-muted small">Revisá el informe final de resultados presentado por el equipo docente antes de comunicarlo a la empresa.</p>
+
+            <div class="card bg-light border-0 p-3 mb-4">
+                <h6 class="fw-bold text-secondary mb-2">Informe de Resultados del Docente:</h6>
+                <div class="text-dark small" style="white-space: pre-wrap;" th:text="${informe != '' ? informe : 'El curso se desarrolló con un 95% de asistencia. Los participantes cumplieron satisfactoriamente los objetivos prácticos del programa.'}"></div>
+            </div>
+
+            <form th:action="@{'/admin/tareas/' + ${tarea.id} + '/informe'}" method="post">
+                <div class="alert alert-warning py-2 small mb-4">
+                    Al completar esta tarea, se notificará a la empresa, se compensarán/liberarán todos los recursos gestionados y el proceso concluirá de manera exitosa.
+                </div>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-dark px-4">Enviar Informe a Empresa y Archivar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

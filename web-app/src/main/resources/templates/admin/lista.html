@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confeccionar Lista Definitiva</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style> body { background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; } </style>
+</head>
+<body class="py-4">
+    <div class="container" style="max-width: 650px;">
+        <div class="card p-4 bg-white border-0 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h5 fw-bold mb-0">Confeccionar Lista Definitiva de Participantes</h3>
+                <a href="/admin/tareas" class="btn btn-sm btn-outline-secondary">&larr; Volver</a>
+            </div>
+            <p class="text-muted small">Registrá la lista final de inscriptos a partir de la nómina enviada por la empresa.</p>
+
+            <div th:if="${nomina != null and nomina != ''}" class="alert alert-info py-2 small mb-3">
+                <strong>Nómina enviada por la empresa:</strong>
+                <div th:text="${nomina}"></div>
+            </div>
+
+            <form th:action="@{'/admin/tareas/' + ${tarea.id} + '/lista'}" method="post">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Lista Definitiva (separar participantes por salto de línea)</label>
+                    <textarea name="listaDefinitiva" class="form-control" rows="6" required th:text="${nomina != '' ? nomina : 'Juan Pérez (DNI: 35.123.456)&#10;Ana Rodríguez (DNI: 38.654.321)&#10;Carlos Gómez (DNI: 32.987.654)'}"></textarea>
+                </div>
+                <div class="mt-4 pt-3 border-top text-end">
+                    <button type="submit" class="btn btn-info text-white px-4">Completar Lista Definitiva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

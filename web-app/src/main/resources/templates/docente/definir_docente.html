@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Definir Docente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style> body { background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; } </style>
+</head>
+<body class="py-4">
+    <div class="container" style="max-width: 600px;">
+        <div class="card p-4 bg-white border-0 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h5 fw-bold mb-0">Definir Docente Responsable</h3>
+                <a href="/docente/tareas" class="btn btn-sm btn-outline-secondary">&larr; Volver</a>
+            </div>
+            <p class="text-muted small">Seleccioná a uno de los integrantes del equipo docente para dictar el curso (podés seleccionarte a vos mismo).</p>
+
+            <form th:action="@{'/docente/tareas/' + ${tarea.id} + '/definir-docente'}" method="post">
+                <div class="mb-4">
+                    <label class="form-label small fw-bold">Docente Asignado</label>
+                    <select name="docenteSeleccionado" class="form-select" required>
+                        <option value="" disabled selected>Seleccioná un docente...</option>
+                        <option value="jefe_docente">Roberto JefeDocente (jefe_docente)</option>
+                        <option value="docente_2">Lucía Docente (docente_2)</option>
+                        <option value="docente_3">Diego Docente (docente_3)</option>
+                    </select>
+                </div>
+
+                <div class="alert alert-info py-2 small mb-4">
+                    El docente seleccionado quedará formalmente asignado a la tarea <strong>"Desarrollar curso"</strong> una vez cumplida la fecha programada.
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary px-4">Confirmar y Asignar Docente</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

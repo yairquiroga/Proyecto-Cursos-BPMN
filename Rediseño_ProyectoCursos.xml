@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="24.02.0">
+<page number="1" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="0" size="22" family="MTOKQT+CMBX12" color="#000000"/>
+	<fontspec id="1" size="18" family="YVQRTK+CMR12" color="#000000"/>
+	<fontspec id="2" size="15" family="KSHYPL+CMR10" color="#000000"/>
+	<fontspec id="3" size="18" family="MTOKQT+CMBX12" color="#000000"/>
+	<fontspec id="4" size="6" family="F51" color="#000000"/>
+	<fontspec id="5" size="15" family="FPGKUJ+CMBX10" color="#000000"/>
+	<fontspec id="6" size="15" family="UDRNVQ+CMTI10" color="#000000"/>
+<text top="197" left="202" width="68" height="19" font="0">Gesti´</text>
+<text top="197" left="258" width="434" height="19" font="0">on y Tecnolog´ıas de Procesos de Negocio</text>
+<text top="276" left="230" width="129" height="16" font="1">Proyecto: Gesti´</text>
+<text top="276" left="350" width="313" height="16" font="1">on y Tecnolog´ıas de Procesos de Negocio</text>
+<text top="338" left="85" width="12" height="19" font="0">1</text>
+<text top="338" left="121" width="110" height="19" font="0">Descripci´</text>
+<text top="338" left="219" width="172" height="19" font="0">on del problema</text>
+<text top="375" left="85" width="258" height="13" font="2">Las empresas solicitan a una instituci´</text>
+<text top="375" left="336" width="464" height="13" font="2">on especializada cursos para capacitar a sus empleados. La instituci´</text>
+<text top="375" left="792" width="16" height="13" font="2">on</text>
+<text top="393" left="85" width="136" height="13" font="2">gestiona la evaluaci´</text>
+<text top="393" left="214" width="395" height="13" font="2">on de la solicitud, el acuerdo con la empresa, la preparaci´</text>
+<text top="393" left="602" width="206" height="13" font="2">on, el desarrollo del curso y su</text>
+<text top="411" left="85" width="40" height="13" font="2">cierre.</text>
+<text top="429" left="107" width="64" height="13" font="2">Se deber´</text>
+<text top="429" left="164" width="621" height="13" font="2">a implementar este proceso en Flowable tomando como referencia el modelo BPMN entregado.</text>
+<text top="469" left="85" width="26" height="16" font="3">1.1</text>
+<text top="469" left="131" width="184" height="16" font="3">Viabilidad y acuerdo</text>
+<text top="498" left="85" width="232" height="13" font="2">Al recibir una solicitud, la instituci´</text>
+<text top="498" left="310" width="53" height="13" font="2">on eval´</text>
+<text top="498" left="355" width="252" height="13" font="2">ua su viabilidad. Si ya tiene cinco o m´</text>
+<text top="498" left="599" width="131" height="13" font="2">as cursos en ejecuci´</text>
+<text top="498" left="723" width="85" height="13" font="2">on, comunica</text>
+<text top="516" left="85" width="165" height="13" font="2">a la empresa que no ser´</text>
+<text top="516" left="242" width="558" height="13" font="2">a posible desarrollar el curso y finaliza la solicitud. Si tiene menos de cinco, contin´</text>
+<text top="516" left="792" width="16" height="13" font="2">ua</text>
+<text top="534" left="85" width="98" height="13" font="2">con el acuerdo.</text>
+<text top="552" left="107" width="700" height="13" font="2">El jefe administrativo registra la solicitud y elabora una propuesta con el programa, el presupuesto y las</text>
+<text top="570" left="85" width="723" height="13" font="2">fechas posibles. Luego env´ıa la propuesta a la empresa y espera su respuesta. La empresa puede aceptarla,</text>
+<text top="588" left="85" width="305" height="13" font="2">rechazarla o solicitar modificaciones. En este ´</text>
+<text top="588" left="382" width="413" height="13" font="2">ultimo caso, el jefe revisa la propuesta y env´ıa una nueva versi´</text>
+<text top="588" left="788" width="20" height="13" font="2">on.</text>
+<text top="606" left="85" width="204" height="13" font="2">El intercambio puede repetirse.</text>
+<text top="624" left="107" width="652" height="13" font="2">Si transcurren cinco d´ıas sin respuesta, se env´ıa un recordatorio y se vuelve a esperar. Se enviar´</text>
+<text top="624" left="752" width="56" height="13" font="2">an como</text>
+<text top="642" left="85" width="20" height="13" font="2">m´</text>
+<text top="642" left="97" width="415" height="13" font="2">aximo dos recordatorios. Si transcurren otros cinco d´ıas despu´</text>
+<text top="642" left="505" width="303" height="13" font="2">es del segundo sin recibir respuesta, se archiva</text>
+<text top="660" left="85" width="334" height="13" font="2">la solicitud y finaliza el proceso. El rechazo tambi´</text>
+<text top="660" left="412" width="223" height="13" font="2">en conduce al archivo y finalizaci´</text>
+<text top="660" left="628" width="20" height="13" font="2">on.</text>
+<text top="678" left="107" width="403" height="13" font="2">El contador de recordatorios se reinicia con cada nueva versi´</text>
+<text top="678" left="503" width="180" height="13" font="2">on enviada de la propuesta.</text>
+<text top="717" left="85" width="26" height="16" font="3">1.2</text>
+<text top="717" left="131" width="95" height="16" font="3">Preparaci´</text>
+<text top="717" left="216" width="107" height="16" font="3">on del curso</text>
+<text top="747" left="85" width="723" height="13" font="2">Una vez aceptada la propuesta, se realizan en paralelo las siguientes actividades, sin dependencias entre las</text>
+<text top="765" left="85" width="43" height="13" font="2">ramas:</text>
+<text top="803" left="107" width="7" height="7" font="4"></text>
+<text top="798" left="122" width="102" height="13" font="5">Inscripciones:</text>
+<text top="798" left="231" width="78" height="13" font="2">recibir la n´</text>
+<text top="798" left="301" width="506" height="13" font="2">omina enviada por la empresa y confeccionar la lista definitiva. No se requiere</text>
+<text top="816" left="122" width="367" height="13" font="2">verificar individualmente los datos de cada participante.</text>
+<text top="850" left="107" width="7" height="7" font="4"></text>
+<text top="846" left="122" width="84" height="13" font="5">Materiales:</text>
+<text top="846" left="213" width="183" height="13" font="2">preparar los materiales did´</text>
+<text top="846" left="388" width="207" height="13" font="2">acticos necesarios para el curso.</text>
+<text top="880" left="107" width="7" height="7" font="4"></text>
+<text top="875" left="122" width="72" height="13" font="5">Recursos:</text>
+<text top="875" left="200" width="608" height="13" font="2">evaluar las necesidades y realizar una o varias de estas acciones: reservar un aula f´ısica, solicitar</text>
+<text top="893" left="122" width="674" height="13" font="2">un aula virtual y contratar equipamiento especial. Deben completarse todas las acciones seleccionadas.</text>
+<text top="926" left="107" width="91" height="13" font="2">La preparaci´</text>
+<text top="926" left="191" width="386" height="13" font="2">on concluye cuando finalizan las tres ramas. La evaluaci´</text>
+<text top="926" left="569" width="145" height="13" font="2">on de recursos deber´</text>
+<text top="926" left="707" width="101" height="13" font="2">a seleccionar al</text>
+<text top="944" left="85" width="197" height="13" font="2">menos una de las alternativas.</text>
+<text top="984" left="85" width="26" height="16" font="3">1.3</text>
+<text top="984" left="131" width="94" height="16" font="3">Cancelaci´</text>
+<text top="984" left="215" width="217" height="16" font="3">on durante la preparaci´</text>
+<text top="984" left="422" width="21" height="16" font="3">on</text>
+<text top="1014" left="85" width="223" height="13" font="2">Mientras se ejecuta el subproceso</text>
+<text top="1014" left="315" width="98" height="13" font="6">Preparar curso</text>
+<text top="1014" left="413" width="274" height="13" font="2">, la empresa puede solicitar la cancelaci´</text>
+<text top="1014" left="679" width="129" height="13" font="2">on. Al recibirla, se</text>
+<text top="1032" left="85" width="162" height="13" font="2">interrumpe la preparaci´</text>
+<text top="1032" left="239" width="569" height="13" font="2">on y se compensan las acciones de recursos que hayan finalizado correctamente: liberar</text>
+<text top="1050" left="85" width="435" height="13" font="2">el aula f´ısica, liberar el aula virtual y liberar el equipamiento, seg´</text>
+<text top="1050" left="513" width="104" height="13" font="2">un corresponda.</text>
+<text top="1067" left="107" width="700" height="13" font="2">Solo deben ejecutarse las compensaciones de los recursos efectivamente gestionados. Una vez concluidas, se</text>
+<text top="1085" left="85" width="330" height="13" font="2">notifica el cierre a la empresa y finaliza el proceso.</text>
+<text top="1210" left="443" width="7" height="13" font="2">1</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="7" size="15" family="ZYMOHX+CMSL10" color="#000000"/>
+<text top="87" left="85" width="19" height="13" font="7">1.4</text>
+<text top="87" left="119" width="149" height="13" font="7">Desarrollo y finalizaci´</text>
+<text top="87" left="261" width="16" height="13" font="7">on</text>
+<text top="143" left="85" width="26" height="16" font="3">1.4</text>
+<text top="143" left="131" width="201" height="16" font="3">Desarrollo y finalizaci´</text>
+<text top="143" left="322" width="21" height="16" font="3">on</text>
+<text top="172" left="85" width="199" height="13" font="2">Cuando concluye la preparaci´</text>
+<text top="172" left="277" width="170" height="13" font="2">on, se env´ıa la confirmaci´</text>
+<text top="172" left="439" width="369" height="13" font="2">on a la empresa. Luego, el jefe del equipo docente realiza</text>
+<text top="190" left="85" width="50" height="13" font="2">la tarea</text>
+<text top="190" left="140" width="265" height="13" font="6">Definir docente para desarrollar el curso</text>
+<text top="190" left="405" width="147" height="13" font="2">, mediante la aplicaci´</text>
+<text top="190" left="545" width="41" height="13" font="2">on m´</text>
+<text top="190" left="579" width="82" height="13" font="2">ovil. Deber´</text>
+<text top="190" left="653" width="155" height="13" font="2">a seleccionar uno de los</text>
+<text top="208" left="85" width="285" height="13" font="2">tres docentes, pudiendo elegirse a s´ı mismo.</text>
+<text top="226" left="107" width="248" height="13" font="2">El docente seleccionado se almacenar´</text>
+<text top="226" left="348" width="256" height="13" font="2">a en una variable del proceso y quedar´</text>
+<text top="226" left="596" width="134" height="13" font="2">a asignado a la tarea</text>
+<text top="226" left="734" width="74" height="13" font="6">Desarrollar</text>
+<text top="244" left="85" width="35" height="13" font="6">curso</text>
+<text top="244" left="120" width="397" height="13" font="2">. Una vez alcanzada la fecha programada, ese docente podr´</text>
+<text top="244" left="509" width="154" height="13" font="2">a registrar la finalizaci´</text>
+<text top="244" left="655" width="97" height="13" font="2">on del dictado.</text>
+<text top="262" left="107" width="700" height="13" font="2">Luego, el jefe del equipo docente elabora el informe de resultados. El jefe administrativo env´ıa el informe a</text>
+<text top="280" left="85" width="228" height="13" font="2">la empresa y archiva el expediente.</text>
+<text top="298" left="107" width="319" height="13" font="2">Al finalizar normalmente, se lanza la compensaci´</text>
+<text top="298" left="419" width="389" height="13" font="2">on prevista en el modelo para liberar los recursos gestionados</text>
+<text top="316" left="85" width="140" height="13" font="2">durante la preparaci´</text>
+<text top="316" left="218" width="400" height="13" font="2">on. El proceso debe concluir una vez completada su liberaci´</text>
+<text top="316" left="610" width="20" height="13" font="2">on.</text>
+<text top="355" left="85" width="26" height="16" font="3">1.5</text>
+<text top="355" left="131" width="155" height="16" font="3">Diagrama BPMN</text>
+<text top="385" left="85" width="570" height="13" font="2">Se proporciona el diagrama BPMN de la Figura 1 como gu´ıa para la implementaci´</text>
+<text top="385" left="648" width="152" height="13" font="2">on del proceso. Podr´</text>
+<text top="385" left="792" width="16" height="13" font="2">an</text>
+<text top="403" left="85" width="723" height="13" font="2">extenderlo o realizar modificaciones menores, siempre que se respeten los requisitos del enunciado y se justifiquen</text>
+<text top="421" left="85" width="148" height="13" font="2">los cambios realizados.</text>
+<text top="465" left="85" width="12" height="19" font="0">2</text>
+<text top="465" left="121" width="304" height="19" font="0">Personal y responsabilidades</text>
+<text top="502" left="85" width="92" height="13" font="2">Administraci´</text>
+<text top="502" left="169" width="638" height="13" font="2">on cuenta con dos personas, una de las cuales es el jefe administrativo. El equipo docente cuenta</text>
+<text top="520" left="85" width="463" height="13" font="2">con tres personas, una de las cuales es el jefe del equipo. Los jefes est´</text>
+<text top="520" left="541" width="207" height="13" font="2">an incluidos en esas cantidades.</text>
+<text top="538" left="107" width="230" height="13" font="2">Las tareas de usuario se distribuir´</text>
+<text top="538" left="330" width="172" height="13" font="2">an de la siguiente manera:</text>
+<text top="572" left="107" width="7" height="7" font="4"></text>
+<text top="567" left="122" width="152" height="13" font="5">Jefe administrativo:</text>
+<text top="567" left="286" width="522" height="13" font="2">registrar y elaborar la propuesta, enviarla, revisarla y archivar una solicitud</text>
+<text top="585" left="122" width="225" height="13" font="2">rechazada o sin respuesta. Tambi´</text>
+<text top="585" left="341" width="46" height="13" font="2">en ser´</text>
+<text top="585" left="379" width="420" height="13" font="2">a responsable de enviar el informe final y archivar el expediente.</text>
+<text top="618" left="107" width="7" height="7" font="4"></text>
+<text top="613" left="122" width="289" height="13" font="5">Cualquiera de los dos administrativos:</text>
+<text top="613" left="419" width="389" height="13" font="2">confeccionar la lista definitiva, preparar materiales, evaluar</text>
+<text top="631" left="122" width="596" height="13" font="2">recursos, solicitar el aula virtual, contratar equipamiento y realizar la tarea de compensaci´</text>
+<text top="631" left="711" width="97" height="13" font="2">on para liberar</text>
+<text top="649" left="122" width="107" height="13" font="2">el equipamiento.</text>
+<text top="682" left="107" width="7" height="7" font="4"></text>
+<text top="677" left="122" width="344" height="13" font="5">Docente seleccionado por el jefe del equipo:</text>
+<text top="677" left="477" width="296" height="13" font="2">desarrollar el curso y registrar la finalizaci´</text>
+<text top="677" left="766" width="42" height="13" font="2">on del</text>
+<text top="695" left="122" width="52" height="13" font="2">dictado.</text>
+<text top="728" left="107" width="7" height="7" font="4"></text>
+<text top="723" left="122" width="178" height="13" font="5">Jefe del equipo docente:</text>
+<text top="723" left="307" width="218" height="13" font="2">definir el docente que desarrollar´</text>
+<text top="723" left="517" width="291" height="13" font="2">a el curso y elaborar el informe de resultados.</text>
+<text top="752" left="107" width="315" height="13" font="2">Las tareas abiertas a varios integrantes tendr´</text>
+<text top="752" left="415" width="393" height="13" font="2">an el grupo correspondiente como candidato. Uno de sus</text>
+<text top="770" left="85" width="112" height="13" font="2">miembros deber´</text>
+<text top="770" left="189" width="542" height="13" font="2">a reclamar la tarea antes de completarla. Las tareas exclusivas de cada jefe estar´</text>
+<text top="770" left="724" width="84" height="13" font="2">an asignadas</text>
+<text top="788" left="85" width="88" height="13" font="2">a ese usuario.</text>
+<text top="806" left="107" width="154" height="13" font="2">Las actividades autom´</text>
+<text top="806" left="254" width="199" height="13" font="2">aticas no requieren intervenci´</text>
+<text top="806" left="446" width="77" height="13" font="2">on humana.</text>
+<text top="824" left="107" width="517" height="13" font="2">Las tareas que tengan un grupo candidato y no tengan usuario asignado deber´</text>
+<text top="824" left="617" width="191" height="13" font="2">an ser reclamadas por uno de</text>
+<text top="842" left="85" width="247" height="13" font="2">sus integrantes antes de completarlas.</text>
+<text top="860" left="107" width="641" height="13" font="2">Las tareas asignadas directamente a un usuario, ya sea por su rol, por un listener o por la selecci´</text>
+<text top="860" left="741" width="67" height="13" font="2">on del jefe</text>
+<text top="878" left="85" width="138" height="13" font="2">docente, no requerir´</text>
+<text top="878" left="216" width="157" height="13" font="2">an reclamo y solo podr´</text>
+<text top="878" left="366" width="233" height="13" font="2">an ser completadas por ese usuario.</text>
+<text top="922" left="85" width="12" height="19" font="0">3</text>
+<text top="922" left="121" width="303" height="19" font="0">Requisitos de implementaci´</text>
+<text top="922" left="412" width="26" height="19" font="0">on</text>
+<text top="960" left="85" width="26" height="16" font="3">3.1</text>
+<text top="960" left="131" width="259" height="16" font="3">Regla de Negocio: Viabilidad</text>
+<text top="990" left="85" width="82" height="13" font="2">La evaluaci´</text>
+<text top="990" left="159" width="173" height="13" font="2">on inicial se implementar´</text>
+<text top="990" left="324" width="102" height="13" font="2">a mediante una</text>
+<text top="990" left="432" width="83" height="13" font="6">decision task</text>
+<text top="990" left="522" width="187" height="13" font="2">de flowable. Su entrada ser´</text>
+<text top="990" left="702" width="106" height="13" font="2">a la cantidad de</text>
+<text top="1007" left="85" width="280" height="13" font="2">otras instancias del proceso de organizaci´</text>
+<text top="1007" left="358" width="421" height="13" font="2">on de cursos que todav´ıa no finalizaron, incluyendo las que est´</text>
+<text top="1007" left="772" width="36" height="13" font="2">an en</text>
+<text top="1025" left="85" width="136" height="13" font="2">acuerdo o preparaci´</text>
+<text top="1025" left="214" width="20" height="13" font="2">on.</text>
+<text top="1043" left="107" width="72" height="13" font="2">Se excluir´</text>
+<text top="1043" left="172" width="228" height="13" font="2">a del conteo la instancia que eval´</text>
+<text top="1043" left="392" width="260" height="13" font="2">ua su propia viabilidad. Se considerar´</text>
+<text top="1043" left="644" width="164" height="13" font="2">an las distintas versiones</text>
+<text top="1061" left="85" width="206" height="13" font="2">desplegadas del mismo proceso.</text>
+<text top="1079" left="107" width="120" height="13" font="2">La regla devolver´</text>
+<text top="1079" left="220" width="182" height="13" font="2">a un resultado que permita:</text>
+<text top="1113" left="107" width="7" height="7" font="4"></text>
+<text top="1108" left="122" width="292" height="13" font="2">Continuar si la cantidad es menor que cinco.</text>
+<text top="1141" left="107" width="7" height="7" font="4"></text>
+<text top="1136" left="122" width="585" height="13" font="2">Comunicar la imposibilidad de desarrollar el curso y finalizar si la cantidad es cinco o m´</text>
+<text top="1136" left="700" width="18" height="13" font="2">as.</text>
+<text top="1165" left="107" width="158" height="13" font="2">La cantidad se obtendr´</text>
+<text top="1165" left="258" width="158" height="13" font="2">a del motor y no deber´</text>
+<text top="1165" left="409" width="194" height="13" font="2">a ser ingresada manualmente.</text>
+<text top="1210" left="421" width="7" height="13" font="2">2</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1262" width="892">
+<image top="182" left="85" width="723" height="916" src="pdf_xml-3_1.png"/>
+<text top="87" left="85" width="19" height="13" font="7">3.1</text>
+<text top="87" left="119" width="192" height="13" font="7">Regla de Negocio: Viabilidad</text>
+<text top="1121" left="248" width="214" height="13" font="2">Figure 1: Proceso de organizaci´</text>
+<text top="1121" left="455" width="178" height="13" font="2">on de cursos de capacitaci´</text>
+<text top="1121" left="625" width="20" height="13" font="2">on.</text>
+<text top="1210" left="421" width="7" height="13" font="2">3</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="8" size="15" family="KSHYPL+CMR10" color="#ff0000"/>
+<text top="87" left="85" width="19" height="13" font="7">3.2</text>
+<text top="87" left="119" width="193" height="13" font="7">Base de datos de la instituci´</text>
+<text top="87" left="304" width="16" height="13" font="7">on</text>
+<text top="143" left="85" width="26" height="16" font="3">3.2</text>
+<text top="143" left="131" width="260" height="16" font="3">Base de datos de la instituci´</text>
+<text top="143" left="381" width="21" height="16" font="3">on</text>
+<text top="172" left="85" width="64" height="13" font="2">Se deber´</text>
+<text top="172" left="141" width="318" height="13" font="2">a crear una base de datos propia de la instituci´</text>
+<text top="172" left="452" width="356" height="13" font="2">on para almacenar las empresas solicitantes y la infor-</text>
+<text top="190" left="85" width="38" height="13" font="2">maci´</text>
+<text top="190" left="116" width="236" height="13" font="2">on de los cursos: nombre, descripci´</text>
+<text top="190" left="345" width="383" height="13" font="2">on, programa, presupuesto, fechas e informe de resultados.</text>
+<text top="208" left="107" width="124" height="13" font="2">Cada curso deber´</text>
+<text top="208" left="224" width="584" height="13" font="2">a estar vinculado con su correspondiente instancia del proceso en Flowable. La lista de</text>
+<text top="226" left="85" width="288" height="13" font="2">participantes y los recursos asignados podr´</text>
+<text top="226" left="365" width="277" height="13" font="2">an mantenerse como variables del proceso.</text>
+<text top="244" left="107" width="81" height="13" font="8">Se entregar´</text>
+<text top="244" left="181" width="510" height="13" font="8">an los scripts necesarios para crear la base de datos y cargar datos de prueba.</text>
+<text top="284" left="85" width="26" height="16" font="3">3.3</text>
+<text top="284" left="131" width="160" height="16" font="3">Usuarios y grupos</text>
+<text top="314" left="85" width="65" height="13" font="2">Se deber´</text>
+<text top="314" left="143" width="567" height="13" font="2">an crear en Flowable los cinco usuarios correspondientes al personal de la instituci´</text>
+<text top="314" left="703" width="105" height="13" font="2">on y los grupos</text>
+<text top="332" left="85" width="92" height="13" font="2">Administraci´</text>
+<text top="332" left="169" width="97" height="13" font="2">on y Docentes.</text>
+<text top="350" left="107" width="94" height="13" font="2">Se identificar´</text>
+<text top="350" left="194" width="459" height="13" font="2">a al jefe administrativo y al jefe del equipo docente, y se configurar´</text>
+<text top="350" left="646" width="162" height="13" font="2">an las asignaciones y los</text>
+<text top="367" left="85" width="536" height="13" font="2">grupos candidatos de las tareas de acuerdo con las responsabilidades establecidas.</text>
+<text top="403" left="107" width="205" height="13" font="8">Los integrantes de la instituci´</text>
+<text top="403" left="305" width="81" height="13" font="8">on ingresar´</text>
+<text top="403" left="378" width="430" height="13" font="8">an a las aplicaciones externas utilizando su ID de usuario y con-</text>
+<text top="421" left="85" width="40" height="13" font="8">trase˜</text>
+<text top="421" left="117" width="691" height="13" font="8">na de Flowable. No se requiere mantener cuentas independientes para este personal en la base de datos de</text>
+<text top="439" left="85" width="77" height="13" font="8">la instituci´</text>
+<text top="439" left="155" width="20" height="13" font="8">on.</text>
+<text top="479" left="85" width="26" height="16" font="3">3.4</text>
+<text top="479" left="131" width="79" height="16" font="3">Listeners</text>
+<text top="509" left="85" width="64" height="13" font="2">Se deber´</text>
+<text top="509" left="141" width="255" height="13" font="2">an implementar los siguientes listeners:</text>
+<text top="546" left="107" width="7" height="7" font="4"></text>
+<text top="541" left="122" width="20" height="13" font="2">Un</text>
+<text top="541" left="148" width="90" height="13" font="6">Task Listener</text>
+<text top="541" left="238" width="202" height="13" font="2">, asociado al evento de creaci´</text>
+<text top="541" left="432" width="93" height="13" font="2">on de la tarea</text>
+<text top="541" left="531" width="184" height="13" font="6">Confeccionar lista definitiva</text>
+<text top="541" left="716" width="92" height="13" font="2">, que consulte</text>
+<text top="559" left="122" width="22" height="13" font="2">cu´</text>
+<text top="559" left="137" width="539" height="13" font="2">antas tareas pendientes tiene asignadas cada integrante del grupo Administraci´</text>
+<text top="559" left="669" width="139" height="13" font="2">on y asigne la nueva</text>
+<text top="577" left="122" width="354" height="13" font="2">tarea a quien tenga menos. En caso de empate, podr´</text>
+<text top="577" left="469" width="204" height="13" font="2">a utilizarse un criterio a elecci´</text>
+<text top="577" left="666" width="20" height="13" font="2">on.</text>
+<text top="612" left="107" width="7" height="7" font="4"></text>
+<text top="607" left="122" width="20" height="13" font="2">Un</text>
+<text top="607" left="146" width="122" height="13" font="6">Execution Listener</text>
+<text top="607" left="275" width="533" height="13" font="2">que, al finalizar la instancia del proceso, actualice el estado del curso en la base de</text>
+<text top="625" left="122" width="139" height="13" font="2">datos de la instituci´</text>
+<text top="625" left="253" width="53" height="13" font="2">on, seg´</text>
+<text top="625" left="299" width="509" height="13" font="2">un el resultado alcanzado: finalizado, cancelado, rechazado, cerrado por falta</text>
+<text top="643" left="122" width="162" height="13" font="2">de respuesta o no viable.</text>
+<text top="676" left="107" width="109" height="13" font="2">Para la asignaci´</text>
+<text top="676" left="209" width="85" height="13" font="2">on se contar´</text>
+<text top="676" left="286" width="522" height="13" font="2">an las tareas de usuario pendientes que cada administrativo tenga asignadas en el</text>
+<text top="694" left="85" width="139" height="13" font="2">motor. No se incluir´</text>
+<text top="694" left="216" width="592" height="13" font="2">an las tareas que solo tengan al grupo como candidato y todav´ıa no hayan sido reclamadas.</text>
+<text top="712" left="107" width="204" height="13" font="2">El resultado del proceso deber´</text>
+<text top="712" left="304" width="331" height="13" font="2">a establecerse en cada camino de cierre para que el</text>
+<text top="712" left="640" width="122" height="13" font="6">Execution Listener</text>
+<text top="712" left="769" width="39" height="13" font="2">pueda</text>
+<text top="730" left="85" width="229" height="13" font="2">registrar el estado correspondiente.</text>
+<text top="770" left="85" width="26" height="16" font="3">3.5</text>
+<text top="770" left="131" width="210" height="16" font="3">Datos y temporizadores</text>
+<text top="799" left="85" width="66" height="13" font="2">Se deber´</text>
+<text top="799" left="143" width="665" height="13" font="2">an definir las variables necesarias para gestionar las propuestas, las respuestas de la empresa, los</text>
+<text top="817" left="85" width="680" height="13" font="2">recordatorios, la fecha del curso, los recursos requeridos, el aula asignada, los participantes y el informe.</text>
+<text top="835" left="107" width="276" height="13" font="2">La fecha de inicio del curso se establecer´</text>
+<text top="835" left="376" width="137" height="13" font="2">a durante la ejecuci´</text>
+<text top="835" left="505" width="302" height="13" font="2">on del proceso, al acordar la propuesta con la</text>
+<text top="853" left="85" width="167" height="13" font="2">empresa, y se almacenar´</text>
+<text top="853" left="244" width="117" height="13" font="2">a en una variable.</text>
+<text top="871" left="107" width="381" height="13" font="2">El temporizador de espera hasta el inicio del curso deber´</text>
+<text top="871" left="481" width="327" height="13" font="2">a utilizar esa variable, sin fijar una fecha concreta</text>
+<text top="889" left="85" width="69" height="13" font="2">en el dise˜</text>
+<text top="889" left="146" width="205" height="13" font="2">no del modelo. Su valor deber´</text>
+<text top="889" left="343" width="285" height="13" font="2">a estar definido antes de alcanzar el evento.</text>
+<text top="907" left="107" width="174" height="13" font="2">Para las pruebas, se podr´</text>
+<text top="907" left="274" width="439" height="13" font="2">an utilizar fechas cercanas y reducir los plazos de los recordatorios.</text>
+<text top="952" left="85" width="12" height="19" font="0">4</text>
+<text top="952" left="121" width="228" height="19" font="0">Aplicaciones externas</text>
+<text top="989" left="85" width="63" height="13" font="2">Se deber´</text>
+<text top="989" left="140" width="667" height="13" font="2">an desarrollar un sitio web y dos aplicaciones auxiliares de escritorio para interactuar con las instancias</text>
+<text top="1007" left="85" width="77" height="13" font="2">del proceso.</text>
+<text top="1025" left="107" width="184" height="13" font="2">Todas las interfaces deber´</text>
+<text top="1025" left="284" width="325" height="13" font="2">an operar sobre las mismas instancias y tareas.</text>
+<text top="1025" left="623" width="185" height="13" font="2">Las operaciones disponibles</text>
+<text top="1043" left="85" width="67" height="13" font="2">depender´</text>
+<text top="1043" left="144" width="522" height="13" font="2">an del usuario identificado, sus responsabilidades y el estado actual del proceso.</text>
+<text top="1082" left="85" width="26" height="16" font="3">4.1</text>
+<text top="1082" left="131" width="219" height="16" font="3">Sitio web de la instituci´</text>
+<text top="1082" left="340" width="21" height="16" font="3">on</text>
+<text top="1112" left="85" width="100" height="13" font="2">El sitio contar´</text>
+<text top="1112" left="178" width="106" height="13" font="2">a con una secci´</text>
+<text top="1112" left="277" width="37" height="13" font="2">on p´</text>
+<text top="1112" left="306" width="312" height="13" font="2">ublica para solicitar capacitaciones y una secci´</text>
+<text top="1112" left="610" width="198" height="13" font="2">on de acceso mediante creden-</text>
+<text top="1130" left="85" width="39" height="13" font="2">ciales.</text>
+<text top="1148" left="107" width="85" height="13" font="2">La interacci´</text>
+<text top="1148" left="185" width="184" height="13" font="2">on con Flowable se realizar´</text>
+<text top="1148" left="361" width="172" height="13" font="2">a mediante su API REST.</text>
+<text top="1210" left="421" width="7" height="13" font="2">4</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="9" size="15" family="FPGKUJ+CMBX10" color="#0000ff"/>
+	<fontspec id="10" size="15" family="KSHYPL+CMR10" color="#0000ff"/>
+	<fontspec id="11" size="15" family="UDRNVQ+CMTI10" color="#0000ff"/>
+<text top="87" left="85" width="19" height="13" font="7">4.1</text>
+<text top="87" left="119" width="162" height="13" font="7">Sitio web de la instituci´</text>
+<text top="87" left="274" width="16" height="13" font="7">on</text>
+<text top="145" left="85" width="35" height="13" font="5">4.1.1</text>
+<text top="145" left="138" width="177" height="13" font="5">Solicitud de capacitaci´</text>
+<text top="145" left="306" width="18" height="13" font="5">on</text>
+<text top="172" left="85" width="130" height="13" font="2">Las empresas podr´</text>
+<text top="172" left="208" width="406" height="13" font="2">an registrar una solicitud mediante un formulario que incluya:</text>
+<text top="210" left="107" width="7" height="7" font="4"></text>
+<text top="205" left="122" width="322" height="13" font="2">Datos de la empresa y de la persona de contacto.</text>
+<text top="240" left="107" width="7" height="7" font="4"></text>
+<text top="235" left="122" width="36" height="13" font="2">Tem´</text>
+<text top="235" left="151" width="114" height="13" font="2">atica y descripci´</text>
+<text top="235" left="257" width="130" height="13" font="2">on de la capacitaci´</text>
+<text top="235" left="379" width="86" height="13" font="2">on solicitada.</text>
+<text top="270" left="107" width="7" height="7" font="4"></text>
+<text top="265" left="122" width="237" height="13" font="2">Cantidad estimada de participantes.</text>
+<text top="300" left="107" width="7" height="7" font="4"></text>
+<text top="295" left="122" width="68" height="13" font="2">Descripci´</text>
+<text top="295" left="183" width="153" height="13" font="2">on de fechas preferidas.</text>
+<text top="328" left="107" width="201" height="13" font="2">El env´ıo del formulario deber´</text>
+<text top="328" left="301" width="160" height="13" font="2">a registrar la informaci´</text>
+<text top="328" left="453" width="355" height="13" font="2">on e iniciar una instancia del proceso. Cada solicitud</text>
+<text top="346" left="85" width="52" height="13" font="2">quedar´</text>
+<text top="346" left="129" width="373" height="13" font="2">a vinculada con su correspondiente instancia en Flowable</text>
+<text top="346" left="507" width="301" height="13" font="8">(Ayuda: podr´ıan guardar el ID de la instancia</text>
+<text top="364" left="85" width="161" height="13" font="8">en la BD de la instituci´</text>
+<text top="364" left="238" width="22" height="13" font="8">on)</text>
+<text top="364" left="260" width="4" height="13" font="2">.</text>
+<text top="403" left="85" width="35" height="13" font="5">4.1.2</text>
+<text top="403" left="138" width="305" height="13" font="9">Acceso y seguimiento para las empresas.</text>
+<text top="430" left="85" width="413" height="13" font="2">Luego de aceptar la propuesta y antes de comenzar la preparaci´</text>
+<text top="430" left="491" width="100" height="13" font="2">on, se ejecutar´</text>
+<text top="430" left="583" width="140" height="13" font="2">a la actividad autom´</text>
+<text top="430" left="715" width="32" height="13" font="2">atica</text>
+<text top="430" left="750" width="58" height="13" font="6">Habilitar</text>
+<text top="448" left="85" width="137" height="13" font="6">acceso de la empresa</text>
+<text top="448" left="222" width="154" height="13" font="2">. Esta actividad crear´</text>
+<text top="448" left="368" width="439" height="13" font="2">a una cuenta para la empresa si todav´ıa no dispone de una. Si ya</text>
+<text top="466" left="85" width="250" height="13" font="2">existe una cuenta por una contrataci´</text>
+<text top="466" left="328" width="167" height="13" font="2">on anterior, se reutilizar´</text>
+<text top="466" left="487" width="105" height="13" font="2">a y se vincular´</text>
+<text top="466" left="585" width="223" height="13" font="2">a el nuevo curso con ella. Para la</text>
+<text top="484" left="85" width="78" height="13" font="2">demostraci´</text>
+<text top="484" left="156" width="121" height="13" font="2">on, la comunicaci´</text>
+<text top="484" left="269" width="184" height="13" font="2">on de las credenciales podr´</text>
+<text top="484" left="445" width="197" height="13" font="2">a simularse o se da por hecho.</text>
+<text top="502" left="107" width="255" height="13" font="2">Una vez identificada, la empresa podr´</text>
+<text top="502" left="355" width="12" height="13" font="2">a:</text>
+<text top="540" left="107" width="7" height="7" font="4"></text>
+<text top="535" left="122" width="138" height="13" font="2">Consultar sus cursos.</text>
+<text top="570" left="107" width="7" height="7" font="4"></text>
+<text top="565" left="122" width="322" height="13" font="2">Visualizar el estado de un curso: en preparaci´</text>
+<text top="565" left="437" width="371" height="13" font="2">on, confirmado y pendiente de inicio, en desarrollo, en</text>
+<text top="583" left="122" width="66" height="13" font="2">elaboraci´</text>
+<text top="583" left="181" width="250" height="13" font="2">on del informe, finalizado o cancelado.</text>
+<text top="617" left="107" width="7" height="7" font="4"></text>
+<text top="613" left="122" width="145" height="13" font="2">Durante la preparaci´</text>
+<text top="613" left="260" width="438" height="13" font="2">on, consultar las actividades actualmente pendientes o en ejecuci´</text>
+<text top="613" left="691" width="76" height="13" font="2">on. Deber´</text>
+<text top="613" left="759" width="49" height="13" font="2">an con-</text>
+<text top="630" left="122" width="321" height="13" font="2">templarse las actividades que se ejecutan simult´</text>
+<text top="630" left="436" width="222" height="13" font="2">aneamente en las ramas paralelas.</text>
+<text top="669" left="85" width="35" height="13" font="5">4.1.3</text>
+<text top="669" left="138" width="224" height="13" font="5">Funciones para Administraci´</text>
+<text top="669" left="353" width="18" height="13" font="5">on</text>
+<text top="697" left="85" width="192" height="13" font="2">Los administrativos ingresar´</text>
+<text top="697" left="270" width="350" height="13" font="2">an con sus respectivas credenciales. El sitio permitir´</text>
+<text top="697" left="613" width="12" height="13" font="2">a:</text>
+<text top="735" left="107" width="7" height="7" font="4"></text>
+<text top="730" left="122" width="480" height="13" font="2">Consultar las tareas asignadas al usuario y las disponibles para su grupo.</text>
+<text top="765" left="107" width="7" height="7" font="4"></text>
+<text top="760" left="122" width="685" height="13" font="2">Reclamar y completar las tareas que correspondan, respetando las responsabilidades establecidas. Las</text>
+<text top="778" left="122" width="367" height="13" font="2">tareas asignadas directamente a un usuario no requerir´</text>
+<text top="778" left="482" width="76" height="13" font="2">an reclamo.</text>
+<text top="812" left="107" width="7" height="7" font="4"></text>
+<text top="807" left="122" width="125" height="13" font="10">Completar la tarea</text>
+<text top="807" left="253" width="197" height="13" font="11">Registrar y elaborar propuesta</text>
+<text top="807" left="456" width="352" height="13" font="10">mediante un formulario y generar el documento PDF</text>
+<text top="825" left="122" width="106" height="13" font="10">correspondiente.</text>
+<text top="860" left="107" width="7" height="7" font="4"></text>
+<text top="855" left="122" width="124" height="13" font="10">Completar la tarea</text>
+<text top="855" left="251" width="116" height="13" font="11">Revisar propuesta</text>
+<text top="855" left="367" width="189" height="13" font="10">, generando una nueva versi´</text>
+<text top="855" left="549" width="80" height="13" font="10">on del PDF.</text>
+<text top="890" left="107" width="7" height="7" font="4"></text>
+<text top="885" left="122" width="121" height="13" font="2">Completar la tarea</text>
+<text top="885" left="246" width="114" height="13" font="6">Archivar solicitud</text>
+<text top="885" left="365" width="442" height="13" font="2">cuando la propuesta sea rechazada o finalicen los plazos sin respuesta.</text>
+<text top="920" left="107" width="7" height="7" font="4"></text>
+<text top="915" left="122" width="124" height="13" font="2">Completar la tarea</text>
+<text top="915" left="251" width="183" height="13" font="6">Confeccionar lista definitiva</text>
+<text top="915" left="434" width="4" height="13" font="2">.</text>
+<text top="950" left="107" width="7" height="7" font="4"></text>
+<text top="945" left="122" width="123" height="13" font="2">Completar la tarea</text>
+<text top="945" left="249" width="108" height="13" font="6">Evaluar recursos</text>
+<text top="945" left="363" width="108" height="13" font="2">mediante una p´</text>
+<text top="945" left="463" width="345" height="13" font="2">agina que permita seleccionar aula f´ısica, aula virtual</text>
+<text top="963" left="122" width="230" height="13" font="2">y equipamiento especial. Se deber´</text>
+<text top="963" left="345" width="463" height="13" font="2">a seleccionar al menos una alternativa. Al completar la tarea, el motor</text>
+<text top="981" left="122" width="52" height="13" font="2">activar´</text>
+<text top="981" left="167" width="191" height="13" font="2">a las ramas correspondientes.</text>
+<text top="1016" left="107" width="7" height="7" font="4"></text>
+<text top="1011" left="122" width="566" height="13" font="2">Permitir al jefe administrativo consultar el informe de resultados y completar la tarea</text>
+<text top="1011" left="694" width="114" height="13" font="6">Enviar informe a</text>
+<text top="1029" left="122" width="195" height="13" font="6">empresa y archivar expediente</text>
+<text top="1029" left="318" width="4" height="13" font="2">.</text>
+<text top="1062" left="107" width="67" height="13" font="2">Las tareas</text>
+<text top="1062" left="179" width="135" height="13" font="6">Solicitar aula virtual</text>
+<text top="1062" left="314" width="4" height="13" font="2">,</text>
+<text top="1062" left="323" width="154" height="13" font="6">Contratar equipamiento</text>
+<text top="1062" left="483" width="8" height="13" font="2">y</text>
+<text top="1062" left="496" width="137" height="13" font="6">Liberar equipamiento</text>
+<text top="1062" left="638" width="38" height="13" font="2">podr´</text>
+<text top="1062" left="669" width="139" height="13" font="2">an realizarse desde la</text>
+<text top="1079" left="85" width="484" height="13" font="2">interfaz de usuario de Flowable, sin exigir pantallas adicionales en el sitio.</text>
+<text top="1097" left="107" width="141" height="13" font="2">La reserva y liberaci´</text>
+<text top="1097" left="241" width="185" height="13" font="2">on del aula f´ısica continuar´</text>
+<text top="1097" left="419" width="116" height="13" font="2">an siendo autom´</text>
+<text top="1097" left="527" width="37" height="13" font="2">aticas</text>
+<text top="1097" left="565" width="207" height="13" font="8">. Simular una supuesta conexi´</text>
+<text top="1097" left="764" width="43" height="13" font="8">on con</text>
+<text top="1115" left="85" width="100" height="13" font="8">un web service.</text>
+<text top="1133" left="107" width="56" height="13" font="2">La tarea</text>
+<text top="1133" left="169" width="203" height="13" font="6">Elaborar informe de resultados</text>
+<text top="1133" left="380" width="26" height="13" font="2">ser´</text>
+<text top="1133" left="398" width="410" height="13" font="2">a realizada por el jefe del equipo docente desde la interfaz de</text>
+<text top="1151" left="85" width="335" height="13" font="2">Flowable o, de manera opcional, desde el sitio web.</text>
+<text top="1151" left="431" width="47" height="13" font="8">Deber´</text>
+<text top="1151" left="471" width="320" height="13" font="8">a generar o adjuntar el informe en formato PDF.</text>
+<text top="1210" left="421" width="7" height="13" font="2">5</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="12" size="15" family="UDRNVQ+CMTI10" color="#ff0000"/>
+<text top="87" left="85" width="19" height="13" font="7">4.2</text>
+<text top="87" left="119" width="148" height="13" font="7">Aplicaciones auxiliares</text>
+<text top="145" left="85" width="35" height="13" font="5">4.1.4</text>
+<text top="145" left="138" width="257" height="13" font="5">Funciones para el Equipo Docente</text>
+<text top="172" left="85" width="212" height="13" font="2">El jefe del equipo docente podr´</text>
+<text top="172" left="290" width="12" height="13" font="2">a:</text>
+<text top="210" left="107" width="7" height="7" font="4"></text>
+<text top="205" left="122" width="227" height="13" font="2">Consultar sus tareas pendientes de</text>
+<text top="205" left="355" width="264" height="13" font="6">Definir docente para desarrollar el curso</text>
+<text top="205" left="618" width="4" height="13" font="2">.</text>
+<text top="240" left="107" width="7" height="7" font="4"></text>
+<text top="235" left="122" width="473" height="13" font="2">Seleccionar uno de los tres integrantes del equipo docente, incluido ´</text>
+<text top="235" left="588" width="65" height="13" font="2">el mismo,</text>
+<text top="235" left="660" width="148" height="13" font="8">y asignarlo a la tarea</text>
+<text top="253" left="122" width="114" height="13" font="12">Desarrollar curso</text>
+<text top="253" left="237" width="4" height="13" font="2">.</text>
+<text top="288" left="107" width="7" height="7" font="4"></text>
+<text top="283" left="122" width="128" height="13" font="2">Completar la tarea.</text>
+<text top="316" left="107" width="269" height="13" font="10">El docente que desarrolla un curso podr´</text>
+<text top="316" left="369" width="12" height="13" font="10">a:</text>
+<text top="351" left="107" width="7" height="7" font="4"></text>
+<text top="346" left="122" width="131" height="13" font="2">Consultar las tareas</text>
+<text top="346" left="258" width="114" height="13" font="6">Desarrollar curso</text>
+<text top="346" left="378" width="135" height="13" font="2">que tenga asignadas.</text>
+<text top="381" left="107" width="7" height="7" font="4"></text>
+<text top="376" left="122" width="235" height="13" font="2">Completar la tarea correspondiente.</text>
+<text top="415" left="85" width="26" height="16" font="3">4.2</text>
+<text top="415" left="131" width="200" height="16" font="3">Aplicaciones auxiliares</text>
+<text top="445" left="85" width="97" height="13" font="2">Se desarrollar´</text>
+<text top="445" left="174" width="259" height="13" font="2">an dos app con las siguientes funciones.</text>
+<text top="484" left="85" width="35" height="13" font="5">4.2.1</text>
+<text top="484" left="138" width="81" height="13" font="5">Preparaci´</text>
+<text top="484" left="210" width="293" height="13" font="5">on de materiales mediante la API Java</text>
+<text top="512" left="85" width="167" height="13" font="2">Esta app con interfaz gr´</text>
+<text top="512" left="244" width="61" height="13" font="2">afica ser´</text>
+<text top="512" left="298" width="502" height="13" font="2">a local a la intranet y tiene alcance a la BD del motor flowable. Esta funci´</text>
+<text top="512" left="792" width="16" height="13" font="2">on</text>
+<text top="530" left="85" width="44" height="13" font="2">deber´</text>
+<text top="530" left="121" width="434" height="13" font="2">a utilizar la API Java de Flowable y permitir a un administrativo:</text>
+<text top="567" left="107" width="7" height="7" font="4"></text>
+<text top="562" left="122" width="223" height="13" font="2">Identificarse y consultar las tareas</text>
+<text top="562" left="351" width="129" height="13" font="6">Preparar materiales</text>
+<text top="562" left="486" width="253" height="13" font="2">que tenga asignadas o pueda reclamar.</text>
+<text top="597" left="107" width="7" height="7" font="4"></text>
+<text top="592" left="122" width="300" height="13" font="2">Reclamar una tarea disponible para su grupo.</text>
+<text top="627" left="107" width="7" height="7" font="4"></text>
+<text top="622" left="122" width="128" height="13" font="2">Completar la tarea.</text>
+<text top="655" left="107" width="77" height="13" font="2">La aplicaci´</text>
+<text top="655" left="177" width="57" height="13" font="2">on podr´</text>
+<text top="655" left="227" width="508" height="13" font="2">a desarrollarse completamente en Java. Si se utiliza otro lenguaje para las dem´</text>
+<text top="655" left="727" width="81" height="13" font="2">as funciones,</text>
+<text top="673" left="85" width="61" height="13" font="2">se deber´</text>
+<text top="673" left="139" width="352" height="13" font="2">a incorporar un componente Java para esta interacci´</text>
+<text top="673" left="483" width="107" height="13" font="2">on con el motor.</text>
+<text top="712" left="85" width="35" height="13" font="5">4.2.2</text>
+<text top="712" left="138" width="72" height="13" font="5">Simulaci´</text>
+<text top="712" left="201" width="344" height="13" font="5">on de comunicaciones mediante la API REST</text>
+<text top="739" left="85" width="91" height="13" font="2">Esta aplicaci´</text>
+<text top="739" left="168" width="82" height="13" font="2">on permitir´</text>
+<text top="739" left="243" width="531" height="13" font="2">a seleccionar una solicitud y simular las siguientes comunicaciones de la empresa:</text>
+<text top="777" left="107" width="7" height="7" font="4"></text>
+<text top="772" left="122" width="64" height="13" font="2">Aceptaci´</text>
+<text top="772" left="179" width="323" height="13" font="2">on de la propuesta, incluyendo la fecha acordada.</text>
+<text top="807" left="107" width="7" height="7" font="4"></text>
+<text top="802" left="122" width="163" height="13" font="2">Rechazo de la propuesta.</text>
+<text top="837" left="107" width="7" height="7" font="4"></text>
+<text top="832" left="122" width="375" height="13" font="2">Solicitud de modificaciones, incluyendo las observaciones.</text>
+<text top="867" left="107" width="7" height="7" font="4"></text>
+<text top="862" left="122" width="95" height="13" font="2">Env´ıo de la n´</text>
+<text top="862" left="210" width="153" height="13" font="2">omina de participantes.</text>
+<text top="897" left="107" width="7" height="7" font="4"></text>
+<text top="892" left="122" width="70" height="13" font="2">Cancelaci´</text>
+<text top="892" left="185" width="161" height="13" font="2">on durante la preparaci´</text>
+<text top="892" left="338" width="20" height="13" font="2">on.</text>
+<text top="925" left="107" width="119" height="13" font="2">Cada comunicaci´</text>
+<text top="925" left="219" width="65" height="13" font="2">on deber´</text>
+<text top="925" left="276" width="532" height="13" font="2">a enviarse mediante la API REST, aportar los datos necesarios y actuar sobre la</text>
+<text top="943" left="85" width="170" height="13" font="2">instancia correspondiente.</text>
+<text top="961" left="107" width="78" height="13" font="2">La aplicaci´</text>
+<text top="961" left="178" width="79" height="13" font="2">on mostrar´</text>
+<text top="961" left="249" width="464" height="13" font="2">a solo las comunicaciones habilitadas en el estado actual. La negociaci´</text>
+<text top="961" left="706" width="102" height="13" font="2">on y el env´ıo de</text>
+<text top="978" left="85" width="32" height="13" font="2">la n´</text>
+<text top="978" left="110" width="118" height="13" font="2">omina se simular´</text>
+<text top="978" left="220" width="149" height="13" font="2">an desde esta aplicaci´</text>
+<text top="978" left="361" width="218" height="13" font="2">on, sin requerir su implementaci´</text>
+<text top="978" left="572" width="118" height="13" font="2">on en el sitio web.</text>
+<text top="996" left="107" width="700" height="13" font="10">Los grupos de hasta 3 personas pueden ejecutar estas acciones desde l´ınea de comando, es decir, sin necesidad</text>
+<text top="1014" left="85" width="124" height="13" font="10">de una interfaz gr´</text>
+<text top="1014" left="201" width="30" height="13" font="10">afica</text>
+<text top="1210" left="421" width="7" height="13" font="2">6</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1262" width="892">
+<text top="140" left="85" width="12" height="19" font="0">5</text>
+<text top="140" left="121" width="239" height="19" font="0">Entrega y demostraci´</text>
+<text top="140" left="348" width="26" height="19" font="0">on</text>
+<text top="178" left="85" width="81" height="13" font="2">Se entregar´</text>
+<text top="178" left="159" width="12" height="13" font="2">a:</text>
+<text top="215" left="107" width="7" height="7" font="4"></text>
+<text top="211" left="122" width="191" height="13" font="2">El modelo BPMN ejecutable.</text>
+<text top="245" left="107" width="7" height="7" font="4"></text>
+<text top="240" left="122" width="33" height="13" font="2">El c´</text>
+<text top="240" left="148" width="455" height="13" font="2">odigo del servicio REST y de los componentes incorporados al motor.</text>
+<text top="275" left="107" width="7" height="7" font="4"></text>
+<text top="270" left="122" width="143" height="13" font="2">Las reglas de negocio.</text>
+<text top="305" left="107" width="7" height="7" font="4"></text>
+<text top="300" left="122" width="472" height="13" font="2">Las instrucciones para configurar usuarios y grupos y ejecutar la soluci´</text>
+<text top="300" left="587" width="20" height="13" font="2">on.</text>
+<text top="335" left="107" width="7" height="7" font="4"></text>
+<text top="330" left="122" width="594" height="13" font="2">Un informe breve que explique las variables, los listeners y las decisiones de implementaci´</text>
+<text top="330" left="709" width="20" height="13" font="2">on.</text>
+<text top="365" left="107" width="7" height="7" font="4"></text>
+<text top="360" left="122" width="33" height="13" font="2">El c´</text>
+<text top="360" left="148" width="656" height="13" font="2">odigo de las tres aplicaciones externas y las instrucciones necesarias para configurarlas y ejecutarlas.</text>
+<text top="393" left="107" width="100" height="13" font="2">La demostraci´</text>
+<text top="393" left="200" width="129" height="13" font="2">on (defensa) deber´</text>
+<text top="393" left="321" width="216" height="13" font="2">a cubrir los siguientes escenarios:</text>
+<text top="426" left="103" width="83" height="13" font="2">1. Aceptaci´</text>
+<text top="426" left="179" width="204" height="13" font="2">on de la propuesta y finalizaci´</text>
+<text top="426" left="376" width="221" height="13" font="2">on normal del curso, con liberaci´</text>
+<text top="426" left="590" width="97" height="13" font="2">on de recursos.</text>
+<text top="456" left="103" width="412" height="13" font="2">2. Solicitud de modificaciones y env´ıo de una nueva propuesta.</text>
+<text top="485" left="103" width="183" height="13" font="2">3. Rechazo de la propuesta.</text>
+<text top="515" left="103" width="386" height="13" font="2">4. Cierre por falta de respuesta, luego de los recordatorios.</text>
+<text top="545" left="103" width="420" height="13" font="2">5. Imposibilidad de continuar por el l´ımite de cursos en ejecuci´</text>
+<text top="545" left="516" width="20" height="13" font="2">on.</text>
+<text top="575" left="103" width="89" height="13" font="2">6. Cancelaci´</text>
+<text top="575" left="185" width="161" height="13" font="2">on durante la preparaci´</text>
+<text top="575" left="338" width="274" height="13" font="2">on, con recursos ya gestionados y ejecuci´</text>
+<text top="575" left="604" width="173" height="13" font="2">on de sus compensaciones.</text>
+<text top="605" left="103" width="266" height="13" font="2">7. Falta de aulas disponibles y generaci´</text>
+<text top="605" left="362" width="112" height="13" font="2">on de la excepci´</text>
+<text top="605" left="467" width="127" height="13" font="2">on correspondiente.</text>
+<text top="635" left="103" width="82" height="13" font="2">8. Asignaci´</text>
+<text top="635" left="178" width="158" height="13" font="2">on, reclamo y finalizaci´</text>
+<text top="635" left="328" width="113" height="13" font="2">on de tareas seg´</text>
+<text top="635" left="433" width="192" height="13" font="2">un los responsables definidos.</text>
+<text top="665" left="103" width="459" height="13" font="2">9. Registro de una solicitud desde el sitio web e inicio de su instancia.</text>
+<text top="695" left="96" width="98" height="13" font="2">10. Habilitaci´</text>
+<text top="695" left="186" width="410" height="13" font="2">on del acceso de la empresa y consulta exclusiva de sus cursos.</text>
+<text top="725" left="96" width="97" height="13" font="2">11. Preparaci´</text>
+<text top="725" left="185" width="330" height="13" font="2">on de materiales mediante la API Java y simulaci´</text>
+<text top="725" left="507" width="301" height="13" font="2">on de comunicaciones mediante la API REST.</text>
+<text top="1210" left="421" width="7" height="13" font="2">7</text>
+</page>
+</pdf2xml>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:flowable="http://flowable.org/bpmn"
+                  id="Definitions_Cursos"
+                  targetNamespace="https://unrc.edu.ar/bpmn/cursos">
+
+  <bpmn:message id="Msg_sol" name="Solicitud de curso" />
+  <bpmn:message id="Msg_acepta" name="Aceptacion" />
+  <bpmn:message id="Msg_rechaza" name="Rechazo" />
+  <bpmn:message id="Msg_mod" name="Solicitud de modificaciones" />
+  <bpmn:message id="Msg_nom" name="Nomina de participantes" />
+  <bpmn:message id="Msg_cancel" name="Cancelacion" />
+  <bpmn:error id="Err_SinAulas" name="SinAulasDisponibles" errorCode="SIN_AULAS_DISPONIBLES" />
+
+  <bpmn:process id="Process_Curso" name="Organizar curso de capacitación" isExecutable="true">
+    <bpmn:extensionElements>
+      <flowable:executionListener event="end" class="ar.edu.unrc.cursos.listeners.ActualizarEstadoCursoExecutionListener" />
+    </bpmn:extensionElements>
+
+    <!-- Inicio y Evaluación de Viabilidad -->
+    <bpmn:startEvent id="Inicio" name="Solicitud recibida">
+      <bpmn:extensionElements>
+        <flowable:executionListener event="start" expression="${execution.setVariable('duracionRecordatorio', execution.getVariable('duracionRecordatorio') != null ? duracionRecordatorio : 'P5D')}" />
+      </bpmn:extensionElements>
+    </bpmn:startEvent>
+
+    <bpmn:serviceTask id="ContarCursos" name="Contar cursos en desarrollo"
+                      flowable:class="ar.edu.unrc.cursos.delegates.ContarCursosEnDesarrolloDelegate" />
+
+    <bpmn:serviceTask id="EvaluarViabilidad" name="Evaluar Viabilidad" flowable:type="dmn">
+      <bpmn:extensionElements>
+        <flowable:field name="decisionTableReferenceKey"><flowable:string>Decision_Viabilidad</flowable:string></flowable:field>
+        <flowable:field name="decisionTaskThrowErrorOnNoHits"><flowable:string>false</flowable:string></flowable:field>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+
+    <bpmn:exclusiveGateway id="GatewayViable" name="¿Es viable?" />
+
+    <bpmn:serviceTask id="NotificarNoViable" name="Notificar Decisión"
+                      flowable:class="ar.edu.unrc.cursos.delegates.NotificarEmpresaDelegate">
+      <bpmn:extensionElements>
+        <flowable:field name="tipoNotificacion"><flowable:string>NO_VIABLE</flowable:string></flowable:field>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="FinNoViable" name="Solicitud no viable" />
+
+    <!-- Acuerdo y Negociación -->
+    <bpmn:userTask id="Propuesta" name="Registrar y Elaborar propuesta" flowable:assignee="jefe_admin">
+      <bpmn:extensionElements>
+        <flowable:executionListener event="start" expression="${execution.setVariable('recordatorios', 0)}" />
+      </bpmn:extensionElements>
+    </bpmn:userTask>
+
+    <bpmn:serviceTask id="EnviarPropuesta" name="Enviar propuesta"
+                      flowable:class="ar.edu.unrc.cursos.delegates.NotificarEmpresaDelegate">
+      <bpmn:extensionElements>
+        <flowable:field name="tipoNotificacion"><flowable:string>PROPUESTA</flowable:string></flowable:field>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+
+    <bpmn:eventBasedGateway id="Esperar" name="Esperar respuesta" />
+
+    <bpmn:intermediateCatchEvent id="Aceptar" name="Aceptación">
+      <bpmn:messageEventDefinition messageRef="Msg_acepta" />
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:intermediateCatchEvent id="Rechazar" name="Rechazo">
+      <bpmn:messageEventDefinition messageRef="Msg_rechaza" />
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:intermediateCatchEvent id="Modificar" name="Modificaciones">
+      <bpmn:messageEventDefinition messageRef="Msg_mod" />
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:intermediateCatchEvent id="Plazo" name="Plazo respuesta">
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration>${duracionRecordatorio}</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:exclusiveGateway id="Limite" name="¿Se enviaron 2 recordatorios?" />
+
+    <bpmn:serviceTask id="Recordatorio" name="Enviar recordatorio"
+                      flowable:class="ar.edu.unrc.cursos.delegates.NotificarEmpresaDelegate">
+      <bpmn:extensionElements>
+        <flowable:field name="tipoNotificacion"><flowable:string>RECORDATORIO</flowable:string></flowable:field>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+
+    <bpmn:userTask id="Revisar" name="Revisar propuesta" flowable:assignee="jefe_admin">
+      <bpmn:extensionElements>
+        <flowable:executionListener event="end" expression="${execution.setVariable('recordatorios', 0)}" />
+      </bpmn:extensionElements>
+    </bpmn:userTask>
+
+    <bpmn:userTask id="Archivar" name="Archivar solicitud" flowable:assignee="jefe_admin" />
+    <bpmn:endEvent id="FinSinCurso" name="Solicitud cerrada" />
+
+    <!-- Habilitar Acceso Empresa -->
+    <bpmn:serviceTask id="HabilitarAcceso" name="Habilitar acceso de la empresa"
+                      flowable:class="ar.edu.unrc.cursos.delegates.HabilitarAccesoEmpresaDelegate" />
+
+    <!-- Subproceso Preparar Curso -->
+    <bpmn:subProcess id="Preparar" name="Preparar curso">
+      <bpmn:startEvent id="SubInicio" />
+      <bpmn:parallelGateway id="ParInicio" />
+
+      <!-- Rama 1: Inscripciones -->
+      <bpmn:receiveTask id="Nomina" name="Recibir nómina" messageRef="Msg_nom" />
+      <bpmn:userTask id="Lista" name="Confeccionar lista definitiva">
+        <bpmn:extensionElements>
+          <flowable:taskListener event="create" class="ar.edu.unrc.cursos.listeners.AsignarListaDefinitivaTaskListener" />
+        </bpmn:extensionElements>
+      </bpmn:userTask>
+
+      <!-- Rama 2: Materiales -->
+      <bpmn:userTask id="Material" name="Preparar materiales" flowable:candidateGroups="Administracion" />
+
+      <!-- Rama 3: Recursos -->
+      <bpmn:userTask id="EvaluarRecursos" name="Evaluar Recursos" flowable:candidateGroups="Administracion">
+        <bpmn:extensionElements>
+          <flowable:executionListener event="start" expression="${execution.setVariable('requiereAula', execution.getVariable('requiereAula') != null ? requiereAula : true)}" />
+          <flowable:executionListener event="start" expression="${execution.setVariable('requierePlataforma', execution.getVariable('requierePlataforma') != null ? requierePlataforma : false)}" />
+          <flowable:executionListener event="start" expression="${execution.setVariable('requiereEquipamiento', execution.getVariable('requiereEquipamiento') != null ? requiereEquipamiento : false)}" />
+        </bpmn:extensionElements>
+      </bpmn:userTask>
+      <bpmn:inclusiveGateway id="OrInicio" />
+
+      <bpmn:serviceTask id="Aula" name="Reservar aula"
+                        flowable:class="ar.edu.unrc.cursos.delegates.ReservarAulaDelegate" />
+      <bpmn:boundaryEvent id="CompAulaBound" attachedToRef="Aula">
+        <bpmn:compensateEventDefinition />
+      </bpmn:boundaryEvent>
+      <bpmn:serviceTask id="LiberarAula" name="Liberar Aula" isForCompensation="true"
+                        flowable:class="ar.edu.unrc.cursos.delegates.LiberarAulaDelegate" />
+
+      <bpmn:boundaryEvent id="ErrorSinAulas" attachedToRef="Aula">
+        <bpmn:errorEventDefinition errorRef="Err_SinAulas" />
+      </bpmn:boundaryEvent>
+
+      <bpmn:userTask id="Virtual" name="Solicitar Aula Virtual" flowable:candidateGroups="Administracion" />
+      <bpmn:boundaryEvent id="CompVirtualBound" attachedToRef="Virtual">
+        <bpmn:compensateEventDefinition />
+      </bpmn:boundaryEvent>
+      <bpmn:serviceTask id="LiberarVirtual" name="Liberar Aula Virtual" isForCompensation="true"
+                        flowable:class="ar.edu.unrc.cursos.delegates.LiberarAulaVirtualDelegate" />
+
+      <bpmn:userTask id="Equipo" name="Contratar equipamiento" flowable:candidateGroups="Administracion" />
+      <bpmn:boundaryEvent id="CompEquipoBound" attachedToRef="Equipo">
+        <bpmn:compensateEventDefinition />
+      </bpmn:boundaryEvent>
+      <bpmn:userTask id="LiberarEquipo" name="Liberar Equipamiento" isForCompensation="true" flowable:candidateGroups="Administracion" />
+
+      <bpmn:inclusiveGateway id="OrFin" />
+      <bpmn:parallelGateway id="ParFin" />
+      <bpmn:endEvent id="SubFin" />
+
+      <!-- Event Subprocess: Cancelación -->
+      <bpmn:subProcess id="SubCancelacion" name="Cancelación" triggeredByEvent="true">
+        <bpmn:startEvent id="InicioCancelacion" name="Recibir Cancelación">
+          <bpmn:extensionElements>
+            <flowable:executionListener event="end" expression="${execution.setVariable('resultadoFinal', 'cancelado')}" />
+          </bpmn:extensionElements>
+          <bpmn:messageEventDefinition messageRef="Msg_cancel" />
+        </bpmn:startEvent>
+        <bpmn:intermediateThrowEvent id="CompensarCancelacion">
+          <bpmn:compensateEventDefinition />
+        </bpmn:intermediateThrowEvent>
+        <bpmn:endEvent id="FinSubCancelacion">
+          <bpmn:errorEventDefinition errorRef="Err_SinAulas" />
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow id="sc1" sourceRef="InicioCancelacion" targetRef="CompensarCancelacion" />
+        <bpmn:sequenceFlow id="sc2" sourceRef="CompensarCancelacion" targetRef="FinSubCancelacion" />
+      </bpmn:subProcess>
+
+      <!-- Flujos internos Subproceso -->
+      <bpmn:sequenceFlow id="s1" sourceRef="SubInicio" targetRef="ParInicio" />
+      <bpmn:sequenceFlow id="s2" sourceRef="ParInicio" targetRef="Nomina" />
+      <bpmn:sequenceFlow id="s3" sourceRef="Nomina" targetRef="Lista" />
+      <bpmn:sequenceFlow id="s4" sourceRef="Lista" targetRef="ParFin" />
+      <bpmn:sequenceFlow id="s5" sourceRef="ParInicio" targetRef="Material" />
+      <bpmn:sequenceFlow id="s6" sourceRef="Material" targetRef="ParFin" />
+      <bpmn:sequenceFlow id="s7" sourceRef="ParInicio" targetRef="EvaluarRecursos" />
+      <bpmn:sequenceFlow id="s8" sourceRef="EvaluarRecursos" targetRef="OrInicio" />
+      <bpmn:sequenceFlow id="or0" sourceRef="OrInicio" targetRef="Aula">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${requiereAula == true}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="or1" sourceRef="OrInicio" targetRef="Virtual">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${requierePlataforma == true}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="or2" sourceRef="OrInicio" targetRef="Equipo">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${requiereEquipamiento == true}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="oj0" sourceRef="Aula" targetRef="OrFin" />
+      <bpmn:sequenceFlow id="oj1" sourceRef="Virtual" targetRef="OrFin" />
+      <bpmn:sequenceFlow id="oj2" sourceRef="Equipo" targetRef="OrFin" />
+      <bpmn:sequenceFlow id="s9" sourceRef="OrFin" targetRef="ParFin" />
+      <bpmn:sequenceFlow id="s10" sourceRef="ParFin" targetRef="SubFin" />
+      <bpmn:endEvent id="FinErrorAula"><bpmn:errorEventDefinition errorRef="Err_SinAulas" /></bpmn:endEvent><bpmn:sequenceFlow id="errAulaFlow" sourceRef="ErrorSinAulas" targetRef="FinErrorAula" />
+
+      <bpmn:association id="AssocAula" associationDirection="One" sourceRef="CompAulaBound" targetRef="LiberarAula" />
+      <bpmn:association id="AssocVirtual" associationDirection="One" sourceRef="CompVirtualBound" targetRef="LiberarVirtual" />
+      <bpmn:association id="AssocEquipo" associationDirection="One" sourceRef="CompEquipoBound" targetRef="LiberarEquipo" />
+    </bpmn:subProcess>
+
+    <!-- Boundary Error en Preparar (Cancelación o Sin Aulas) -->
+    <bpmn:boundaryEvent id="BoundaryErrorPreparar" attachedToRef="Preparar">
+      <bpmn:errorEventDefinition />
+    </bpmn:boundaryEvent>
+
+    <bpmn:serviceTask id="NotificarCierre" name="Notificar Cierre"
+                      flowable:class="ar.edu.unrc.cursos.delegates.NotificarEmpresaDelegate">
+      <bpmn:extensionElements>
+        <flowable:field name="tipoNotificacion"><flowable:string>CANCELACION</flowable:string></flowable:field>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="FinCancelado" name="Curso cancelado" />
+
+    <!-- Confirmación, Docentes e Informe Final -->
+    <bpmn:serviceTask id="Confirmar" name="Enviar confirmación"
+                      flowable:class="ar.edu.unrc.cursos.delegates.NotificarEmpresaDelegate">
+      <bpmn:extensionElements>
+        <flowable:field name="tipoNotificacion"><flowable:string>CONFIRMACION_CURSO</flowable:string></flowable:field>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+
+    <bpmn:userTask id="DefinirDocente" name="Definir Docente que desarrolla el curso" flowable:assignee="jefe_docente" />
+
+    <bpmn:intermediateCatchEvent id="Fecha" name="Fecha programada">
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDate>${fechaCurso}</bpmn:timeDate>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+
+    <bpmn:userTask id="Dictar" name="Desarrollar curso" flowable:assignee="${docenteSeleccionado}" />
+
+    <bpmn:userTask id="Informe" name="Elaborar informe de resultados" flowable:assignee="jefe_docente" />
+
+    <bpmn:userTask id="EnviarInforme" name="Enviar informe a empresa y Archivar expediente" flowable:assignee="jefe_admin">
+      <bpmn:extensionElements>
+        <flowable:executionListener event="end" expression="${execution.setVariable('resultadoFinal', 'finalizado')}" />
+      </bpmn:extensionElements>
+    </bpmn:userTask>
+
+    <bpmn:endEvent id="Fin" name="Liberar recursos. Curso finalizado">
+      <bpmn:compensateEventDefinition />
+    </bpmn:endEvent>
+
+    <!-- Secuencias Principales -->
+    <bpmn:sequenceFlow id="f1" sourceRef="Inicio" targetRef="ContarCursos" />
+    <bpmn:sequenceFlow id="f2" sourceRef="ContarCursos" targetRef="EvaluarViabilidad" />
+    <bpmn:sequenceFlow id="f3" sourceRef="EvaluarViabilidad" targetRef="GatewayViable" />
+    <bpmn:sequenceFlow id="f_viable" name="Sí" sourceRef="GatewayViable" targetRef="Propuesta">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${esViable == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="f_noviable" name="No" sourceRef="GatewayViable" targetRef="NotificarNoViable">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${esViable == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="f4" sourceRef="NotificarNoViable" targetRef="FinNoViable" />
+
+    <bpmn:sequenceFlow id="f5" sourceRef="Propuesta" targetRef="EnviarPropuesta" />
+    <bpmn:sequenceFlow id="f6" sourceRef="EnviarPropuesta" targetRef="Esperar" />
+
+    <bpmn:sequenceFlow id="w0" sourceRef="Esperar" targetRef="Aceptar" />
+    <bpmn:sequenceFlow id="w1" sourceRef="Esperar" targetRef="Rechazar" />
+    <bpmn:sequenceFlow id="w2" sourceRef="Esperar" targetRef="Modificar" />
+    <bpmn:sequenceFlow id="w3" sourceRef="Esperar" targetRef="Plazo" />
+
+    <bpmn:sequenceFlow id="f_mod" sourceRef="Modificar" targetRef="Revisar" />
+    <bpmn:sequenceFlow id="f_rev" sourceRef="Revisar" targetRef="EnviarPropuesta" />
+
+    <bpmn:sequenceFlow id="f_plazo" sourceRef="Plazo" targetRef="Limite" />
+    <bpmn:sequenceFlow id="f_rec_no" name="No" sourceRef="Limite" targetRef="Recordatorio">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${recordatorios &lt; 2}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="f_rec_loop" sourceRef="Recordatorio" targetRef="Esperar" />
+
+    <bpmn:sequenceFlow id="f_rec_si" name="Sí" sourceRef="Limite" targetRef="Archivar">
+      <bpmn:extensionElements>
+        <flowable:executionListener event="take" expression="${execution.setVariable('resultadoFinal', 'cerrado_sin_respuesta')}" />
+      </bpmn:extensionElements>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${recordatorios &gt;= 2}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+
+    <bpmn:sequenceFlow id="f_rech" sourceRef="Rechazar" targetRef="Archivar">
+      <bpmn:extensionElements>
+        <flowable:executionListener event="take" expression="${execution.setVariable('resultadoFinal', 'rechazado')}" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="f_arch" sourceRef="Archivar" targetRef="FinSinCurso" />
+
+    <bpmn:sequenceFlow id="f_acep" sourceRef="Aceptar" targetRef="HabilitarAcceso" />
+    <bpmn:sequenceFlow id="f_hab" sourceRef="HabilitarAcceso" targetRef="Preparar" />
+    <bpmn:sequenceFlow id="f_err_prep" sourceRef="BoundaryErrorPreparar" targetRef="NotificarCierre" />
+    <bpmn:sequenceFlow id="f_not_cierre" sourceRef="NotificarCierre" targetRef="FinCancelado" />
+
+    <bpmn:sequenceFlow id="f_prep" sourceRef="Preparar" targetRef="Confirmar" />
+    <bpmn:sequenceFlow id="f_conf" sourceRef="Confirmar" targetRef="DefinirDocente" />
+    <bpmn:sequenceFlow id="f_def_doc" sourceRef="DefinirDocente" targetRef="Fecha" />
+    <bpmn:sequenceFlow id="f_fecha" sourceRef="Fecha" targetRef="Dictar" />
+    <bpmn:sequenceFlow id="f_dictar" sourceRef="Dictar" targetRef="Informe" />
+    <bpmn:sequenceFlow id="f_inf" sourceRef="Informe" targetRef="EnviarInforme" />
+    <bpmn:sequenceFlow id="f_fin" sourceRef="EnviarInforme" targetRef="Fin" />
+  </bpmn:process>
+</bpmn:definitions>

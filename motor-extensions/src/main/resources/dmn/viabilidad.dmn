@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             id="Definitions_Viabilidad"
+             name="Evaluar Viabilidad de Curso"
+             namespace="http://www.flowable.org/dmn">
+  <decision id="Decision_Viabilidad" name="Evaluar Viabilidad">
+    <decisionTable id="DecisionTable_Viabilidad" hitPolicy="FIRST">
+      <input id="Input_Cursos" label="Cursos en desarrollo">
+        <inputExpression id="InputExpression_Cursos" typeRef="number">
+          <text>cantidadCursosEnDesarrollo</text>
+        </inputExpression>
+      </input>
+      <output id="Output_Viable" label="Es viable" name="esViable" typeRef="boolean" />
+      <rule id="Rule_Viable">
+        <inputEntry id="InputEntry_Menor5">
+          <text>&lt; 5</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_True">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_NoViable">
+        <inputEntry id="InputEntry_MayorIgual5">
+          <text>&gt;= 5</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_False">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

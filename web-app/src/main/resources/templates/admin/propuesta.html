@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar y Elaborar Propuesta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style> body { background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; } </style>
+</head>
+<body class="py-4">
+    <div class="container" style="max-width: 650px;">
+        <div class="card p-4 bg-white border-0 shadow-sm">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="h5 fw-bold mb-0">Registrar y Elaborar Propuesta</h3>
+                <a href="/admin/tareas" class="btn btn-sm btn-outline-secondary">&larr; Volver</a>
+            </div>
+            <p class="text-muted small">Completá los términos de la propuesta inicial acordada para presentar a la empresa.</p>
+
+            <form th:action="@{'/admin/tareas/' + ${tarea.id} + '/propuesta'}" method="post">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Programa Detallado del Curso</label>
+                    <textarea name="programa" class="form-control" rows="4" placeholder="Módulos, contenidos temáticos y modalidad..." required>Módulo 1: Fundamentos. Módulo 2: Arquitectura y patrones. Módulo 3: Práctica integradora.</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Presupuesto Estimado ($ ARS)</label>
+                    <input type="text" name="presupuesto" class="form-control" placeholder="Ej: 350000" value="350000" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Fechas Posibles / Propuestas</label>
+                    <input type="text" name="fechasDisponibles" class="form-control" placeholder="Ej: Del 15 al 30 del próximo mes" value="Del 15 al 30 del próximo mes" required>
+                </div>
+
+                <div class="mt-4 pt-3 border-top text-end">
+                    <button type="submit" class="btn btn-primary px-4">Enviar Propuesta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

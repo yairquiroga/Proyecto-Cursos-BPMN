@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Capacitación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
+        .form-card { max-width: 700px; margin: 40px auto; border-radius: 12px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .section-title { font-size: 1.1rem; font-weight: 600; color: #1e3c72; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-bottom: 16px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card form-card p-4 bg-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h4 fw-bold mb-0">Solicitud de Curso de Capacitación</h2>
+                <a href="/" class="btn btn-sm btn-outline-secondary">&larr; Inicio</a>
+            </div>
+            <p class="text-muted small mb-4">Completá el formulario para solicitar una propuesta a medida. La solicitud será evaluada de inmediato por nuestro equipo.</p>
+
+            <div th:if="${exito}" class="alert alert-success alert-dismissible fade show" role="alert">
+                <span th:text="${exito}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <form th:action="@{/solicitud}" method="post">
+                <div class="section-title">1. Datos de la Empresa y Contacto</div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">CUIT</label>
+                        <input type="text" name="cuit" class="form-control" placeholder="30-71234567-8" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Razón Social</label>
+                        <input type="text" name="razonSocial" class="form-control" placeholder="TechSolutions S.A." required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Nombre del Contacto</label>
+                        <input type="text" name="contactoNombre" class="form-control" placeholder="Laura Gómez" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Email de Contacto</label>
+                        <input type="email" name="contactoEmail" class="form-control" placeholder="contacto@empresa.com" required>
+                    </div>
+                </div>
+
+                <div class="section-title mt-4">2. Detalle de la Capacitación</div>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label small fw-bold">Temática Solicitada</label>
+                        <input type="text" name="tematica" class="form-control" placeholder="Ej: Microservicios con Spring Boot, Kubernetes, etc." required>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small fw-bold">Descripción / Alcance</label>
+                        <textarea name="descripcion" class="form-control" rows="3" placeholder="Detalle los objetivos que busca alcanzar con la capacitación..." required></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Cantidad Estimada de Participantes</label>
+                        <input type="number" name="cantidadParticipantes" class="form-control" min="1" max="100" value="15" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold">Fechas Preferidas</label>
+                        <input type="text" name="fechasPreferidas" class="form-control" placeholder="Ej: Primera quincena del próximo mes" required>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-top text-end">
+                    <button type="submit" class="btn btn-primary px-4 py-2">Enviar Solicitud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+Gestión y Tecnologı́as de Procesos de Negocio
+
+Proyecto: Gestión y Tecnologı́as de Procesos de Negocio
+
+1
+
+Descripción del problema
+
+Las empresas solicitan a una institución especializada cursos para capacitar a sus empleados. La institución
+gestiona la evaluación de la solicitud, el acuerdo con la empresa, la preparación, el desarrollo del curso y su
+cierre.
+Se deberá implementar este proceso en Flowable tomando como referencia el modelo BPMN entregado.
+
+1.1
+
+Viabilidad y acuerdo
+
+Al recibir una solicitud, la institución evalúa su viabilidad. Si ya tiene cinco o más cursos en ejecución, comunica
+a la empresa que no será posible desarrollar el curso y finaliza la solicitud. Si tiene menos de cinco, continúa
+con el acuerdo.
+El jefe administrativo registra la solicitud y elabora una propuesta con el programa, el presupuesto y las
+fechas posibles. Luego envı́a la propuesta a la empresa y espera su respuesta. La empresa puede aceptarla,
+rechazarla o solicitar modificaciones. En este último caso, el jefe revisa la propuesta y envı́a una nueva versión.
+El intercambio puede repetirse.
+Si transcurren cinco dı́as sin respuesta, se envı́a un recordatorio y se vuelve a esperar. Se enviarán como
+máximo dos recordatorios. Si transcurren otros cinco dı́as después del segundo sin recibir respuesta, se archiva
+la solicitud y finaliza el proceso. El rechazo también conduce al archivo y finalización.
+El contador de recordatorios se reinicia con cada nueva versión enviada de la propuesta.
+
+1.2
+
+Preparación del curso
+
+Una vez aceptada la propuesta, se realizan en paralelo las siguientes actividades, sin dependencias entre las
+ramas:
+ Inscripciones: recibir la nómina enviada por la empresa y confeccionar la lista definitiva. No se requiere
+verificar individualmente los datos de cada participante.
+ Materiales: preparar los materiales didácticos necesarios para el curso.
+ Recursos: evaluar las necesidades y realizar una o varias de estas acciones: reservar un aula fı́sica, solicitar
+un aula virtual y contratar equipamiento especial. Deben completarse todas las acciones seleccionadas.
+
+La preparación concluye cuando finalizan las tres ramas. La evaluación de recursos deberá seleccionar al
+menos una de las alternativas.
+
+1.3
+
+Cancelación durante la preparación
+
+Mientras se ejecuta el subproceso Preparar curso, la empresa puede solicitar la cancelación. Al recibirla, se
+interrumpe la preparación y se compensan las acciones de recursos que hayan finalizado correctamente: liberar
+el aula fı́sica, liberar el aula virtual y liberar el equipamiento, según corresponda.
+Solo deben ejecutarse las compensaciones de los recursos efectivamente gestionados. Una vez concluidas, se
+notifica el cierre a la empresa y finaliza el proceso.
+
+1
+
+1.4
+
+Desarrollo y finalización
+
+1.4
+
+Desarrollo y finalización
+
+Cuando concluye la preparación, se envı́a la confirmación a la empresa. Luego, el jefe del equipo docente realiza
+la tarea Definir docente para desarrollar el curso, mediante la aplicación móvil. Deberá seleccionar uno de los
+tres docentes, pudiendo elegirse a sı́ mismo.
+El docente seleccionado se almacenará en una variable del proceso y quedará asignado a la tarea Desarrollar
+curso. Una vez alcanzada la fecha programada, ese docente podrá registrar la finalización del dictado.
+Luego, el jefe del equipo docente elabora el informe de resultados. El jefe administrativo envı́a el informe a
+la empresa y archiva el expediente.
+Al finalizar normalmente, se lanza la compensación prevista en el modelo para liberar los recursos gestionados
+durante la preparación. El proceso debe concluir una vez completada su liberación.
+
+1.5
+
+Diagrama BPMN
+
+Se proporciona el diagrama BPMN de la Figura 1 como guı́a para la implementación del proceso. Podrán
+extenderlo o realizar modificaciones menores, siempre que se respeten los requisitos del enunciado y se justifiquen
+los cambios realizados.
+
+2
+
+Personal y responsabilidades
+
+Administración cuenta con dos personas, una de las cuales es el jefe administrativo. El equipo docente cuenta
+con tres personas, una de las cuales es el jefe del equipo. Los jefes están incluidos en esas cantidades.
+Las tareas de usuario se distribuirán de la siguiente manera:
+ Jefe administrativo: registrar y elaborar la propuesta, enviarla, revisarla y archivar una solicitud
+rechazada o sin respuesta. También será responsable de enviar el informe final y archivar el expediente.
+ Cualquiera de los dos administrativos: confeccionar la lista definitiva, preparar materiales, evaluar
+recursos, solicitar el aula virtual, contratar equipamiento y realizar la tarea de compensación para liberar
+el equipamiento.
+ Docente seleccionado por el jefe del equipo: desarrollar el curso y registrar la finalización del
+dictado.
+ Jefe del equipo docente: definir el docente que desarrollará el curso y elaborar el informe de resultados.
+
+Las tareas abiertas a varios integrantes tendrán el grupo correspondiente como candidato. Uno de sus
+miembros deberá reclamar la tarea antes de completarla. Las tareas exclusivas de cada jefe estarán asignadas
+a ese usuario.
+Las actividades automáticas no requieren intervención humana.
+Las tareas que tengan un grupo candidato y no tengan usuario asignado deberán ser reclamadas por uno de
+sus integrantes antes de completarlas.
+Las tareas asignadas directamente a un usuario, ya sea por su rol, por un listener o por la selección del jefe
+docente, no requerirán reclamo y solo podrán ser completadas por ese usuario.
+
+3
+
+Requisitos de implementación
+
+3.1
+
+Regla de Negocio: Viabilidad
+
+La evaluación inicial se implementará mediante una decision task de flowable. Su entrada será la cantidad de
+otras instancias del proceso de organización de cursos que todavı́a no finalizaron, incluyendo las que están en
+acuerdo o preparación.
+Se excluirá del conteo la instancia que evalúa su propia viabilidad. Se considerarán las distintas versiones
+desplegadas del mismo proceso.
+La regla devolverá un resultado que permita:
+ Continuar si la cantidad es menor que cinco.
+ Comunicar la imposibilidad de desarrollar el curso y finalizar si la cantidad es cinco o más.
+
+La cantidad se obtendrá del motor y no deberá ser ingresada manualmente.
+2
+
+3.1
+
+Regla de Negocio: Viabilidad
+
+Figure 1: Proceso de organización de cursos de capacitación.
+
+3
+
+3.2
+
+Base de datos de la institución
+
+3.2
+
+Base de datos de la institución
+
+Se deberá crear una base de datos propia de la institución para almacenar las empresas solicitantes y la información de los cursos: nombre, descripción, programa, presupuesto, fechas e informe de resultados.
+Cada curso deberá estar vinculado con su correspondiente instancia del proceso en Flowable. La lista de
+participantes y los recursos asignados podrán mantenerse como variables del proceso.
+Se entregarán los scripts necesarios para crear la base de datos y cargar datos de prueba.
+
+3.3
+
+Usuarios y grupos
+
+Se deberán crear en Flowable los cinco usuarios correspondientes al personal de la institución y los grupos
+Administración y Docentes.
+Se identificará al jefe administrativo y al jefe del equipo docente, y se configurarán las asignaciones y los
+grupos candidatos de las tareas de acuerdo con las responsabilidades establecidas.
+Los integrantes de la institución ingresarán a las aplicaciones externas utilizando su ID de usuario y contraseña de Flowable. No se requiere mantener cuentas independientes para este personal en la base de datos de
+la institución.
+
+3.4
+
+Listeners
+
+Se deberán implementar los siguientes listeners:
+ Un Task Listener, asociado al evento de creación de la tarea Confeccionar lista definitiva, que consulte
+cuántas tareas pendientes tiene asignadas cada integrante del grupo Administración y asigne la nueva
+tarea a quien tenga menos. En caso de empate, podrá utilizarse un criterio a elección.
+ Un Execution Listener que, al finalizar la instancia del proceso, actualice el estado del curso en la base de
+datos de la institución, según el resultado alcanzado: finalizado, cancelado, rechazado, cerrado por falta
+de respuesta o no viable.
+
+Para la asignación se contarán las tareas de usuario pendientes que cada administrativo tenga asignadas en el
+motor. No se incluirán las tareas que solo tengan al grupo como candidato y todavı́a no hayan sido reclamadas.
+El resultado del proceso deberá establecerse en cada camino de cierre para que el Execution Listener pueda
+registrar el estado correspondiente.
+
+3.5
+
+Datos y temporizadores
+
+Se deberán definir las variables necesarias para gestionar las propuestas, las respuestas de la empresa, los
+recordatorios, la fecha del curso, los recursos requeridos, el aula asignada, los participantes y el informe.
+La fecha de inicio del curso se establecerá durante la ejecución del proceso, al acordar la propuesta con la
+empresa, y se almacenará en una variable.
+El temporizador de espera hasta el inicio del curso deberá utilizar esa variable, sin fijar una fecha concreta
+en el diseño del modelo. Su valor deberá estar definido antes de alcanzar el evento.
+Para las pruebas, se podrán utilizar fechas cercanas y reducir los plazos de los recordatorios.
+
+4
+
+Aplicaciones externas
+
+Se deberán desarrollar un sitio web y dos aplicaciones auxiliares de escritorio para interactuar con las instancias
+del proceso.
+Todas las interfaces deberán operar sobre las mismas instancias y tareas. Las operaciones disponibles
+dependerán del usuario identificado, sus responsabilidades y el estado actual del proceso.
+
+4.1
+
+Sitio web de la institución
+
+El sitio contará con una sección pública para solicitar capacitaciones y una sección de acceso mediante credenciales.
+La interacción con Flowable se realizará mediante su API REST.
+
+4
+
+4.1
+
+Sitio web de la institución
+
+4.1.1
+
+Solicitud de capacitación
+
+Las empresas podrán registrar una solicitud mediante un formulario que incluya:
+ Datos de la empresa y de la persona de contacto.
+ Temática y descripción de la capacitación solicitada.
+ Cantidad estimada de participantes.
+ Descripción de fechas preferidas.
+
+El envı́o del formulario deberá registrar la información e iniciar una instancia del proceso. Cada solicitud
+quedará vinculada con su correspondiente instancia en Flowable (Ayuda: podrı́an guardar el ID de la instancia
+en la BD de la institución).
+4.1.2
+
+Acceso y seguimiento para las empresas.
+
+Luego de aceptar la propuesta y antes de comenzar la preparación, se ejecutará la actividad automática Habilitar
+acceso de la empresa. Esta actividad creará una cuenta para la empresa si todavı́a no dispone de una. Si ya
+existe una cuenta por una contratación anterior, se reutilizará y se vinculará el nuevo curso con ella. Para la
+demostración, la comunicación de las credenciales podrá simularse o se da por hecho.
+Una vez identificada, la empresa podrá:
+ Consultar sus cursos.
+ Visualizar el estado de un curso: en preparación, confirmado y pendiente de inicio, en desarrollo, en
+elaboración del informe, finalizado o cancelado.
+ Durante la preparación, consultar las actividades actualmente pendientes o en ejecución. Deberán contemplarse las actividades que se ejecutan simultáneamente en las ramas paralelas.
+
+4.1.3
+
+Funciones para Administración
+
+Los administrativos ingresarán con sus respectivas credenciales. El sitio permitirá:
+ Consultar las tareas asignadas al usuario y las disponibles para su grupo.
+ Reclamar y completar las tareas que correspondan, respetando las responsabilidades establecidas. Las
+tareas asignadas directamente a un usuario no requerirán reclamo.
+ Completar la tarea Registrar y elaborar propuesta mediante un formulario y generar el documento PDF
+correspondiente.
+ Completar la tarea Revisar propuesta, generando una nueva versión del PDF.
+ Completar la tarea Archivar solicitud cuando la propuesta sea rechazada o finalicen los plazos sin respuesta.
+ Completar la tarea Confeccionar lista definitiva.
+ Completar la tarea Evaluar recursos mediante una página que permita seleccionar aula fı́sica, aula virtual
+y equipamiento especial. Se deberá seleccionar al menos una alternativa. Al completar la tarea, el motor
+activará las ramas correspondientes.
+ Permitir al jefe administrativo consultar el informe de resultados y completar la tarea Enviar informe a
+empresa y archivar expediente.
+
+Las tareas Solicitar aula virtual, Contratar equipamiento y Liberar equipamiento podrán realizarse desde la
+interfaz de usuario de Flowable, sin exigir pantallas adicionales en el sitio.
+La reserva y liberación del aula fı́sica continuarán siendo automáticas. Simular una supuesta conexión con
+un web service.
+La tarea Elaborar informe de resultados será realizada por el jefe del equipo docente desde la interfaz de
+Flowable o, de manera opcional, desde el sitio web. Deberá generar o adjuntar el informe en formato PDF.
+
+5
+
+4.2
+
+Aplicaciones auxiliares
+
+4.1.4
+
+Funciones para el Equipo Docente
+
+El jefe del equipo docente podrá:
+ Consultar sus tareas pendientes de Definir docente para desarrollar el curso.
+ Seleccionar uno de los tres integrantes del equipo docente, incluido él mismo, y asignarlo a la tarea
+Desarrollar curso.
+ Completar la tarea.
+
+El docente que desarrolla un curso podrá:
+ Consultar las tareas Desarrollar curso que tenga asignadas.
+ Completar la tarea correspondiente.
+
+4.2
+
+Aplicaciones auxiliares
+
+Se desarrollarán dos app con las siguientes funciones.
+4.2.1
+
+Preparación de materiales mediante la API Java
+
+Esta app con interfaz gráfica será local a la intranet y tiene alcance a la BD del motor flowable. Esta función
+deberá utilizar la API Java de Flowable y permitir a un administrativo:
+ Identificarse y consultar las tareas Preparar materiales que tenga asignadas o pueda reclamar.
+ Reclamar una tarea disponible para su grupo.
+ Completar la tarea.
+
+La aplicación podrá desarrollarse completamente en Java. Si se utiliza otro lenguaje para las demás funciones,
+se deberá incorporar un componente Java para esta interacción con el motor.
+4.2.2
+
+Simulación de comunicaciones mediante la API REST
+
+Esta aplicación permitirá seleccionar una solicitud y simular las siguientes comunicaciones de la empresa:
+ Aceptación de la propuesta, incluyendo la fecha acordada.
+ Rechazo de la propuesta.
+ Solicitud de modificaciones, incluyendo las observaciones.
+ Envı́o de la nómina de participantes.
+ Cancelación durante la preparación.
+
+Cada comunicación deberá enviarse mediante la API REST, aportar los datos necesarios y actuar sobre la
+instancia correspondiente.
+La aplicación mostrará solo las comunicaciones habilitadas en el estado actual. La negociación y el envı́o de
+la nómina se simularán desde esta aplicación, sin requerir su implementación en el sitio web.
+Los grupos de hasta 3 personas pueden ejecutar estas acciones desde lı́nea de comando, es decir, sin necesidad
+de una interfaz gráfica
+
+6
+
+5
+
+Entrega y demostración
+
+Se entregará:
+ El modelo BPMN ejecutable.
+ El código del servicio REST y de los componentes incorporados al motor.
+ Las reglas de negocio.
+ Las instrucciones para configurar usuarios y grupos y ejecutar la solución.
+ Un informe breve que explique las variables, los listeners y las decisiones de implementación.
+ El código de las tres aplicaciones externas y las instrucciones necesarias para configurarlas y ejecutarlas.
+
+La demostración (defensa) deberá cubrir los siguientes escenarios:
+1. Aceptación de la propuesta y finalización normal del curso, con liberación de recursos.
+2. Solicitud de modificaciones y envı́o de una nueva propuesta.
+3. Rechazo de la propuesta.
+4. Cierre por falta de respuesta, luego de los recordatorios.
+5. Imposibilidad de continuar por el lı́mite de cursos en ejecución.
+6. Cancelación durante la preparación, con recursos ya gestionados y ejecución de sus compensaciones.
+7. Falta de aulas disponibles y generación de la excepción correspondiente.
+8. Asignación, reclamo y finalización de tareas según los responsables definidos.
+9. Registro de una solicitud desde el sitio web e inicio de su instancia.
+10. Habilitación del acceso de la empresa y consulta exclusiva de sus cursos.
+11. Preparación de materiales mediante la API Java y simulación de comunicaciones mediante la API REST.
+
+7
+
+

@@ -1,0 +1,105 @@
+name: proyecto-cursos-dev
+
+services:
+  postgres:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      LOAD_SEED_DATA: ${LOAD_SEED_DATA:-true}
+      TZ: UTC
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/db/init:/docker-entrypoint-initdb.d:ro
+      - ./infra/db/sql:/db-sql:ro
+      - ./infra/db/migrations:/db-migrations:ro
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test:
+        ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - flowable-net
+
+  flowable:
+    image: flowable/flowable-ui:6.8.0
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME:
+        org.postgresql.Driver
+      SPRING_DATASOURCE_URL:
+        jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      # No autodesplegar el BPMN que viene dentro del .jar: se despliega con `make deploy`
+      FLOWABLE_CHECK_PROCESS_DEFINITIONS: "false"
+      # Las fechas (DATE) se convierten con la zona de la JVM: se fija UTC para que no se corran un día
+      TZ: UTC
+    volumes:
+      # JAR con delegates/listeners montado directamente en WEB-INF/lib (el classloader de Spring Boot lo levanta solo)
+      - ./flowable-lib/motor-extensions-1.0.0.jar:/app/WEB-INF/lib/motor-extensions-1.0.0.jar:ro
+    ports:
+      - "127.0.0.1:8080:8080"
+    networks:
+      - flowable-net
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      flowable:
+        condition: service_started
+    environment:
+      SERVER_PORT: 8081
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      FLOWABLE_REST_URL: http://flowable:8080/flowable-ui/process-api
+      FLOWABLE_USER: ${FLOWABLE_USER:-admin}
+      FLOWABLE_PASSWORD: ${FLOWABLE_PASSWORD:-test}
+      INFORMES_DIR: /data/informes
+      TZ: UTC
+    volumes:
+      # PDFs de los informes; la ruta relativa se guarda en cursos.resultados.
+      - ./data/informes:/data/informes
+    ports:
+      - "127.0.0.1:8081:8081"
+    networks:
+      - flowable-net
+
+  pgadmin:
+    image: dpage/pgadmin4
+    profiles: ["dev"]
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@localhost.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "127.0.0.1:5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - flowable-net
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  flowable-net:
+    driver: bridge
