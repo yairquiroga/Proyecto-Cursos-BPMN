@@ -1,0 +1,79 @@
+Paso 1: Iniciar una nueva solicitud de curso
+
+En tu terminal, ejecutá el script para iniciar una nueva instancia:
+
+bash infra/scripts/iniciar_solicitud.sh 1 "Microservicios con Spring Boot"
+
+Qué sucede internamente:
+Se ejecuta automáticamente el delegate ContarCursosEnDesarrolloDelegate.
+La regla DMN evalúa la viabilidad (esViable = true).
+El proceso avanza y crea la primera tarea humana: "Registrar y Elaborar propuesta" asignada a jefe_admin.
+Guardá el ID de la instancia que te imprima en pantalla (ej: 92a38ebc-...).
+
+Paso 2: Elaborar y enviar la propuesta (como jefe_admin)
+Abrí tu navegador e ingresá a Flowable UI: http://localhost:8080/flowable-ui
+Iniciá sesión con:
+Usuario: jefe_admin
+Contraseña: test
+Andá a la pestaña Tasks. Vas a ver la tarea "Registrar y Elaborar propuesta".
+Hacé clic en la tarea y pulsá el botón Complete (en el panel derecho).
+Qué sucede internamente:
+Se dispara automáticamente el delegate NotificarEmpresaDelegate que "envía" la propuesta a la empresa.
+El proceso entra en el Event-Based Gateway ("Esperar respuesta"), quedando a la espera de la decisión de la empresa.
+
+Paso 3: Simular la aceptación de la propuesta (desde rest-simulator)
+
+Como no implementamos la interfaz privada de la empresa (letra en azul), usamos el simulador REST por consola:
+
+bash rest-simulator/simular.sh
+
+El simulador te va a listar las instancias activas. Pegá el ID de tu instancia y presioná Enter.
+En el menú, seleccioná la opción 1) Aceptar propuesta.
+Te pedirá una fecha programada para el curso (podés presionar Enter para aceptar la fecha sugerida por defecto).
+Qué sucede internamente:
+Se envía el mensaje BPMN Aceptacion.
+Se ejecuta el delegate HabilitarAccesoEmpresaDelegate (habilita la cuenta en la BD y marca cursoEnDesarrollo = true).
+El proceso entra en el subproceso "Preparar curso", activando sus 3 ramas en paralelo:
+Inscripciones: esperando la nómina de participantes.
+Materiales: crea la tarea "Preparar materiales didácticos" para el grupo Administración.
+Recursos: crea la tarea "Evaluar recursos" para el grupo Administración.
+
+Paso 4: Preparar los materiales didácticos (desde java-materials-app)
+
+Esta actividad se realiza con la aplicación Java independiente conectada por la API Java:
+
+En una terminal ejecutá:
+
+bash java-materials-app/run.sh --cli
+
+Ingresá el usuario: admin_2 (o jefe_admin).
+Presioná 1 para consultar las tareas disponibles. Verás la tarea "Preparar materiales didácticos" con su ID.
+Presioná 2 para reclamar la tarea (ingresá el ID de la tarea).
+Presioná 3 para completar la tarea (ingresá el mismo ID).
+Resultado: La rama de materiales finaliza utilizando exclusivamente la API Java de Flowable. Salí con 0.
+
+Paso 5: Enviar nómina y evaluar recursos
+Enviar la nómina de participantes: Volvé al simulador REST (bash rest-simulator/simular.sh), seleccioná tu instancia y elegí la opción 4) Enviar nómina de participantes (presioná Enter para enviar la lista por defecto).
+Confeccionar lista definitiva y Evaluar recursos: En Flowable UI (http://localhost:8080/flowable-ui
+):
+Como jefe_admin o admin_2, en Tasks verás:
+"Confeccionar lista definitiva": asignada automáticamente por el TaskListener al administrativo con menos carga. Hacé clic y completala.
+"Evaluar recursos": reclamala y completala.
+Al completarse, se reserva el aula física automáticamente con el delegate ReservarAulaDelegate.
+
+Paso 6: Definir docente y desarrollar el curso
+Al completarse las 3 ramas de preparación, se envía la confirmación a la empresa y se activa la tarea "Definir Docente que desarrolla el curso".
+Cerrá sesión en Flowable UI e ingresá como Jefe Docente:
+Usuario: jefe_docente | Contraseña: test
+En Tasks verás "Definir Docente que desarrolla el curso".
+Podés completarla agregando la variable de proceso docenteSeleccionado con el valor docente_2 (o jefe_docente).
+Una vez cumplida la fecha programada (o si avanzás el timer), el docente seleccionado verá en sus tareas "Desarrollar curso" y la completará al finalizar las clases.
+
+Paso 7: Cierre del proceso y compensación de recursos
+jefe_docente completa la tarea "Elaborar informe de resultados".
+jefe_admin completa "Enviar informe a empresa y Archivar expediente".
+El proceso llega al evento de fin con compensación:
+Se disparan automáticamente LiberarAulaDelegate y LiberarAulaVirtualDelegate.
+El ActualizarEstadoCursoExecutionListener actualiza el estado en la base de datos institucional a 'finalizado'.
+
+
